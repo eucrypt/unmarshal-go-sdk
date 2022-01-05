@@ -6,14 +6,9 @@ import (
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/token_price"
 )
 
-const (
-	productionEndpoint = "https://api.unmarshal.io/"
-	stagingEndpoint    = "https://stg-api.unmarshal.io/"
-)
-
 type Session struct {
-	config Config
-	client httpclient.Request
+	Config Config
+	Client httpclient.Request
 }
 
 type Unmarshal struct {
@@ -22,16 +17,21 @@ type Unmarshal struct {
 }
 
 func NewWithConfig(config Config) Unmarshal {
-	sess := Session{config: config}
+	setDefaults(&config)
+	httpClient := httpclient.NewHttpJSONClient(config.Environment.GetEndpoint())
+	if config.HttpClient != nil {
+		httpClient.HttpClient = config.HttpClient
+	}
+	sess := Session{Config: config, Client: httpClient}
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
 		PriceStore: token_price.New(sess),
 	}
 }
 
-func NewWithOptions(options ...ConfigOptions) Unmarshal {
-	config := NewConfig(options...)
-	sess := Session{config: config}
+func NewWithOptions(authKey string, options ...ConfigOptions) Unmarshal {
+	config := NewConfig(authKey, options...)
+	sess := Session{Config: config}
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
 		PriceStore: token_price.New(sess),
