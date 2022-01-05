@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"github.com/pkg/errors"
 	"go.elastic.co/apm/module/apmhttp"
 	"io"
 	"io/ioutil"
@@ -58,7 +58,7 @@ var DefaultErrorHandler = func(res *http.Response, uri string) error {
 	if res.StatusCode == http.StatusOK || res.StatusCode == http.StatusCreated {
 		return nil
 	}
-	return errors.New("Error in making request")
+	return errors.New("error in making request")
 }
 
 func (r *Request) GetWithContext(result interface{}, path string, query url.Values, ctx context.Context) error {
