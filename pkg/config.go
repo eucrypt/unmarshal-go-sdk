@@ -9,10 +9,10 @@ type Config struct {
 
 type ConfigOptions func(config *Config)
 
-func NewConfigOptions(options ...ConfigOptions) {
+func NewConfig(options ...ConfigOptions) Config {
 	config := Config{}
 	for _, option := range options {
 		option(&config)
 	}
-	return
+	return config
 }
