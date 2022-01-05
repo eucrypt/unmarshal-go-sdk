@@ -7,13 +7,13 @@ import (
 )
 
 const (
-	productionEndpoint = "https://api.unmarshal.io/"
-	stagingEndpoint    = "https://stg-api.unmarshal.io/"
+	productionEndpoint = "https://api.unmarshal.com/"
+	stagingEndpoint    = "https://stg-api.unmarshal.com/"
 )
 
 type Session struct {
-	config Config
-	client httpclient.Request
+	Config Config
+	Client httpclient.Request
 }
 
 type Unmarshal struct {
@@ -22,7 +22,7 @@ type Unmarshal struct {
 }
 
 func NewWithConfig(config Config) Unmarshal {
-	sess := Session{config: config}
+	sess := Session{Config: config}
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
 		PriceStore: token_price.New(sess),
@@ -31,7 +31,7 @@ func NewWithConfig(config Config) Unmarshal {
 
 func NewWithOptions(options ...ConfigOptions) Unmarshal {
 	config := NewConfig(options...)
-	sess := Session{config: config}
+	sess := Session{Config: config}
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
 		PriceStore: token_price.New(sess),

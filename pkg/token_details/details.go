@@ -1,19 +1,41 @@
 package token_details
 
-import "github.com/eucrypt/unmarshal-go-sdk/pkg"
+import (
+	"github.com/eucrypt/unmarshal-go-sdk/pkg"
+	"net/url"
+	"strings"
+)
 
-type TokenStore interface {
-	GetTokenDetails(contractAddress string)
-}
+const TokenStoreV1Path = "v1/tokenstore/token"
 
-type TokenStoreImpl struct {
+type TokenStoreV1 struct {
 	sess pkg.Session
 }
 
-func New(sess pkg.Session) TokenStoreImpl {
-	return TokenStoreImpl{sess}
+func New(sess pkg.Session) TokenStoreV1 {
+	return TokenStoreV1{sess}
 }
 
-func (t TokenStoreImpl) GetTokenDetails(contractAddress string) {
-	panic("implement me")
+func (t TokenStoreV1) GetTokenDetailsWithContract(contractAddress string) (resp TokenDetails, err error) {
+	path := strings.Join([]string{TokenStoreV1Path, "address", contractAddress}, "/")
+	err = t.sess.Client.Get(&resp, path, nil)
+	return
+}
+
+func (t TokenStoreV1) GetTokenList(queryParams map[string]string) (resp GetTokenListResponse, err error) {
+	path := strings.Join([]string{TokenStoreV1Path, "all"}, "/")
+	var urlVals = new(url.Values)
+	if queryParams != nil {
+		for key, val := range queryParams {
+			urlVals.Add(key, val)
+		}
+	}
+	err = t.sess.Client.Get(&resp, path, *urlVals)
+	return
+}
+
+func (t TokenStoreV1) GetTokenWithSymbol(symbol string) (resp []TokenDetails, err error) {
+	path := strings.Join([]string{TokenStoreV1Path, "symbol", symbol}, "/")
+	err = t.sess.Client.Get(&resp, path, nil)
+	return
 }
