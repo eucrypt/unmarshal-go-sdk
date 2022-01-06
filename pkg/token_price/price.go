@@ -10,7 +10,8 @@ import (
 )
 
 type PriceStore interface {
-	GetPriceAtInstant(contractAddress string, timestamp int64) (TokenPrice, error)
+	GetPriceAtInstant(contractAddress string, chain constants.Chain, timestamp int64) (TokenPrice, error)
+	GetCurrentPrice(contractAddress string, chain constants.Chain) (resp TokenPrice, err error)
 }
 
 type PriceStoreV1 struct {
@@ -23,7 +24,7 @@ func New(sess pkg.Session) PriceStoreV1 {
 
 const PriceStoreV1Path = "/pricestore"
 
-func (t PriceStoreV1) GetPriceAtInstant(contractAddress string, chain constants.Chain, timestamp int64) (resp TokenPrice, err error) {
+func (p PriceStoreV1) GetPriceAtInstant(contractAddress string, chain constants.Chain, timestamp int64) (resp TokenPrice, err error) {
 	if constants.GetTokensPrice.IsAllowedToCallOnChain(chain) {
 		return TokenPrice{}, constants.UnsupportedChainError
 	}
@@ -33,13 +34,38 @@ func (t PriceStoreV1) GetPriceAtInstant(contractAddress string, chain constants.
 		"timestamp": fmt.Sprint(timestamp),
 	}
 	httpclient.QueryParamHelper(queryParams, urlVals)
-	err = t.sess.Client.Get(&resp, path, *urlVals)
+	err = p.sess.Client.Get(&resp, path, *urlVals)
 	return
 }
 
-func (t PriceStoreV1) GetCurrentPrice(contractAddress string) (resp TokenPrice, err error) {
-	path := strings.Join([]string{PriceStoreV1Path, "all"}, "/")
+func (p PriceStoreV1) GetCurrentPrice(contractAddress string, chain constants.Chain) (resp TokenPrice, err error) {
+	if constants.GetTokensPrice.IsAllowedToCallOnChain(chain) {
+		return TokenPrice{}, constants.UnsupportedChainError
+	}
+	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), contractAddress}, "/")
 	var urlVals = new(url.Values)
-	err = t.sess.Client.Get(&resp, path, *urlVals)
+	err = p.sess.Client.Get(&resp, path, *urlVals)
+
+	return
+}
+
+func (p PriceStoreV1) GetGainers(chain constants.Chain) (resp TokenPriceList, err error) {
+	if constants.GetGainers.IsAllowedToCallOnChain(chain) {
+		return TokenPriceList{}, constants.UnsupportedChainError
+	}
+	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "gainers"}, "/")
+	var urlVals = new(url.Values)
+	err = p.sess.Client.Get(&resp, path, *urlVals)
+
+	return
+}
+func (p PriceStoreV1) GetLosers(chain constants.Chain) (resp TokenPriceList, err error) {
+	if constants.GetLosers.IsAllowedToCallOnChain(chain) {
+		return TokenPriceList{}, constants.UnsupportedChainError
+	}
+	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "losers"}, "/")
+	var urlVals = new(url.Values)
+	err = p.sess.Client.Get(&resp, path, *urlVals)
+
 	return
 }
