@@ -1,5 +1,14 @@
 package token_price
 
+import "github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
+
+type PriceStore interface {
+	GetPriceAtInstant(contractAddress string, chain constants.Chain, timestamp int64) (TokenPrice, error)
+	GetCurrentPrice(contractAddress string, chain constants.Chain) (resp TokenPrice, err error)
+	GetGainers(chain constants.Chain) (resp TokenPriceList, err error)
+	GetLosers(chain constants.Chain) (resp TokenPriceList, err error)
+}
+
 type TokenPrice struct {
 	TokenId   string `json:"tokenId"`
 	Timestamp string `json:"timestamp"`

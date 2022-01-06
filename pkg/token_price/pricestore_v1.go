@@ -9,11 +9,6 @@ import (
 	"strings"
 )
 
-type PriceStore interface {
-	GetPriceAtInstant(contractAddress string, chain constants.Chain, timestamp int64) (TokenPrice, error)
-	GetCurrentPrice(contractAddress string, chain constants.Chain) (resp TokenPrice, err error)
-}
-
 type PriceStoreV1 struct {
 	sess pkg.Session
 }
