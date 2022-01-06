@@ -1,6 +1,7 @@
 package pkg
 
 import (
+	"github.com/eucrypt/unmarshal-go-sdk/pkg/assets"
 	conf "github.com/eucrypt/unmarshal-go-sdk/pkg/config"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
@@ -11,6 +12,7 @@ import (
 type Unmarshal struct {
 	token_details.TokenStore
 	token_price.PriceStore
+	assets.Assets
 }
 
 func NewWithConfig(config conf.Config) Unmarshal {
@@ -24,6 +26,7 @@ func NewWithConfig(config conf.Config) Unmarshal {
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
 		PriceStore: token_price.New(sess),
+		Assets:     assets.New(sess),
 	}
 }
 
@@ -33,5 +36,6 @@ func NewWithOptions(authKey string, options ...conf.ConfigOptions) Unmarshal {
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
 		PriceStore: token_price.New(sess),
+		Assets:     assets.New(sess),
 	}
 }
