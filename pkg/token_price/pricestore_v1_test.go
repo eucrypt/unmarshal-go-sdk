@@ -18,22 +18,22 @@ func TestPriceStoreV1_GetPrice(t1 *testing.T) {
 	var time int64 = 1600173203
 
 	t1.Run("Evaluate Get Price at instant", func(t *testing.T) {
-		resp, err := ps.GetPriceAtInstant(validAddr, chain, time)
+		resp, err := ps.GetPriceAtInstant(chain, validAddr, time)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 
-		resp, _ = ps.GetPriceAtInstant("invalidAddr", chain, time)
+		resp, _ = ps.GetPriceAtInstant(chain, "invalidAddr", time)
 		ast.Empty(resp, "should have an empty response for an invalid call")
 	})
 
 	t1.Run("Evaluate Get  Current Price", func(t *testing.T) {
-		resp, err := ps.GetCurrentPrice(validAddr, chain)
+		resp, err := ps.GetCurrentPrice(chain, validAddr)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 
-		resp, _ = ps.GetCurrentPrice("invalidAddr", chain)
+		resp, _ = ps.GetCurrentPrice(chain, "invalidAddr")
 		ast.Empty(resp, "should have an empty response for an invalid call")
 	})
 
@@ -79,6 +79,21 @@ func TestPriceStoreV1_GetTokensPrice(t *testing.T) {
 		ast.NotEmpty(resp, "The response should not be empty")
 
 		resp, _ = ps.GetTokensPrice(chain, nil)
+		ast.Empty(resp, "should have an empty response for an invalid call")
+	})
+}
+
+func TestPriceStoreV1_GetPriceWithSymbol(t *testing.T) {
+	ps := getTestPriceStore()
+	ast := assert.New(t)
+	symbol := "marsh"
+	t.Run("Evaluate GetPriceWithSymbol", func(t *testing.T) {
+		resp, err := ps.GetPriceWithSymbol(symbol)
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+
+		resp, _ = ps.GetPriceWithSymbol("")
 		ast.Empty(resp, "should have an empty response for an invalid call")
 	})
 }
