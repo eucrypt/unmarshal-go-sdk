@@ -24,11 +24,10 @@ func (p PriceStoreV1) GetPriceAtInstant(contractAddress string, chain constants.
 		return TokenPrice{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), contractAddress}, "/")
-	var urlVals = make(url.Values)
-	var queryParams = map[string]string{
+	var queryParams = map[string]interface{}{
 		"timestamp": fmt.Sprint(timestamp),
 	}
-	httpclient.QueryParamHelper(queryParams, &urlVals)
+	var urlVals = httpclient.QueryParamHelper(queryParams)
 	err = p.sess.Client.Get(&resp, path, urlVals)
 	return
 }
@@ -44,9 +43,9 @@ func (p PriceStoreV1) GetCurrentPrice(contractAddress string, chain constants.Ch
 	return
 }
 
-func (p PriceStoreV1) GetGainers(chain constants.Chain) (resp TokenPriceList, err error) {
+func (p PriceStoreV1) GetGainers(chain constants.Chain) (resp TokenDetailsResp, err error) {
 	if !constants.GetGainers.IsAllowedToCallOnChain(chain) {
-		return TokenPriceList{}, constants.UnsupportedChainError
+		return TokenDetailsResp{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "gainers"}, "/")
 	var urlVals = make(url.Values)
@@ -54,12 +53,40 @@ func (p PriceStoreV1) GetGainers(chain constants.Chain) (resp TokenPriceList, er
 
 	return
 }
-func (p PriceStoreV1) GetLosers(chain constants.Chain) (resp TokenPriceList, err error) {
+
+func (p PriceStoreV1) GetLosers(chain constants.Chain) (resp TokenDetailsResp, err error) {
 	if !constants.GetLosers.IsAllowedToCallOnChain(chain) {
-		return TokenPriceList{}, constants.UnsupportedChainError
+		return TokenDetailsResp{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "losers"}, "/")
 	var urlVals = make(url.Values)
+	err = p.sess.Client.Get(&resp, path, urlVals)
+
+	return
+}
+
+func (p PriceStoreV1) GetLPTokens(chain constants.Chain, lptoken string) (resp TokenListWithPrice, err error) {
+	if !constants.GetLpTokenPrice.IsAllowedToCallOnChain(chain) {
+		return TokenListWithPrice{}, constants.UnsupportedChainError
+	}
+	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "lptokens"}, "/")
+	var queryParams = map[string]interface{}{
+		"lptokens": lptoken,
+	}
+	var urlVals = httpclient.QueryParamHelper(queryParams)
+	err = p.sess.Client.Get(&resp, path, urlVals)
+
+	return
+}
+
+func (p PriceStoreV1) GetTokensPrice(chain constants.Chain, tokenList []string) (resp TokenListWithPrice, err error) {
+	if !constants.GetTokensPrice.IsAllowedToCallOnChain(chain) {
+		return TokenListWithPrice{}, constants.UnsupportedChainError
+	}
+	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "tokens"}, "/")
+	var urlVals = httpclient.QueryParamHelper(map[string]interface{}{
+		"tokens": tokenList,
+	})
 	err = p.sess.Client.Get(&resp, path, urlVals)
 
 	return
