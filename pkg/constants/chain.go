@@ -23,15 +23,16 @@ const (
 )
 
 //This should be manually changed when a new chain starts being supported
-var allChainsTrue = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOL: true}
+var allChains = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOL: true}
 
+var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
 var allowedCallersByAPI = map[APIName]map[Chain]bool{
-	GetPriceWithAddress: allChainsTrue,
-	GetTokensPrice:      allChainsTrue,
-	GetLpTokenPrice:     allChainsTrue,
-	GetLosers:           allChainsTrue,
-	GetGainers:          allChainsTrue,
-	GetAssets:           allChainsTrue,
+	GetPriceWithAddress: priceStoreSupported,
+	GetTokensPrice:      priceStoreSupported,
+	GetLpTokenPrice:     priceStoreSupported,
+	GetLosers:           priceStoreSupported,
+	GetGainers:          priceStoreSupported,
+	GetAssets:           allChains,
 }
 
 //String returns the string specific version of the chain
