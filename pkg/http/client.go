@@ -18,6 +18,7 @@ import (
 type Request struct {
 	BaseUrl      string
 	Headers      map[string]string
+	DefaultQuery map[string]string
 	HttpClient   *http.Client
 	ErrorHandler func(res *http.Response, uri string) error
 }
@@ -30,6 +31,7 @@ func NewHttpClient(baseUrl string) Request {
 	return Request{
 		Headers:      make(map[string]string),
 		HttpClient:   newDefaultClient(),
+		DefaultQuery: make(map[string]string),
 		ErrorHandler: DefaultErrorHandler,
 		BaseUrl:      baseUrl,
 	}
@@ -62,6 +64,7 @@ var DefaultErrorHandler = func(res *http.Response, uri string) error {
 }
 
 func (r *Request) GetWithContext(result interface{}, path string, query url.Values, ctx context.Context) error {
+	r.AppendDefaultQuery(&query)
 	var queryStr = ""
 	if query != nil {
 		queryStr = query.Encode()
@@ -71,6 +74,7 @@ func (r *Request) GetWithContext(result interface{}, path string, query url.Valu
 }
 
 func (r *Request) Get(result interface{}, path string, query url.Values) error {
+	r.AppendDefaultQuery(&query)
 	var queryStr = ""
 	if query != nil {
 		queryStr = query.Encode()
@@ -136,6 +140,15 @@ func (r *Request) GetBase(path string) string {
 		return r.BaseUrl
 	}
 	return fmt.Sprintf("%s/%s", r.BaseUrl, path)
+}
+
+func (r *Request) AppendDefaultQuery(query *url.Values) {
+	for k, v := range r.DefaultQuery {
+		if existingValue := query.Get(k); len(existingValue) > 0 {
+			continue
+		}
+		query.Add(k, v)
+	}
 }
 
 func GetBody(body interface{}) (buf io.ReadWriter, err error) {
