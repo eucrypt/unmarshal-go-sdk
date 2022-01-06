@@ -7,18 +7,18 @@ type APIName string
 
 const (
 	ETH    Chain = "eth"
-	BSC          = "bsc"
-	MATIC        = "matic"
-	XDC          = "xinfin"
-	SOLANA       = "solana"
+	BSC    Chain = "bsc"
+	MATIC  Chain = "matic"
+	XDC    Chain = "xinfin"
+	SOLANA Chain = "solana"
 )
 
 const (
 	GetPriceWithAddress APIName = "GetPriceWithAddress"
-	GetTokensPrice              = "GetTokensPrice"
-	GetLpTokenPrice             = "GetLpTokenPrice"
-	GetLosers                   = "GetLosers"
-	GetGainers                  = "GetGainers"
+	GetTokensPrice      APIName = "GetTokensPrice"
+	GetLpTokenPrice     APIName = "GetLpTokenPrice"
+	GetLosers           APIName = "GetLosers"
+	GetGainers          APIName = "GetGainers"
 )
 
 var allChainsTrue = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOLANA: true}
@@ -30,6 +30,7 @@ var allowedCallersByAPI = map[APIName]map[Chain]bool{
 	GetGainers:          allChainsTrue,
 }
 
+//String returns the string specific version of the chain
 func (c Chain) String() string {
 	return string(c)
 }
