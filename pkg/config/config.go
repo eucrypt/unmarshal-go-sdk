@@ -1,4 +1,4 @@
-package pkg
+package config
 
 import (
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
@@ -33,7 +33,7 @@ func WithEnvironment(env constants.Environment) ConfigOptions {
 	}
 }
 
-func setDefaults(config *Config) {
+func SetDefaults(config *Config) {
 	if len(config.Environment) == 0 {
 		config.Environment = constants.Prod
 	}

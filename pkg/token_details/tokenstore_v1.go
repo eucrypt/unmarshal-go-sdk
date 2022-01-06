@@ -1,8 +1,8 @@
 package token_details
 
 import (
-	"github.com/eucrypt/unmarshal-go-sdk/pkg"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
+	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
 	"net/url"
 	"strings"
 )
@@ -10,10 +10,10 @@ import (
 const TokenStoreV1Path = "v1/tokenstore/token"
 
 type TokenStoreV1 struct {
-	sess pkg.Session
+	sess session.Session
 }
 
-func New(sess pkg.Session) TokenStoreV1 {
+func New(sess session.Session) TokenStoreV1 {
 	return TokenStoreV1{sess}
 }
 

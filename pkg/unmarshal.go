@@ -1,38 +1,35 @@
 package pkg
 
 import (
+	conf "github.com/eucrypt/unmarshal-go-sdk/pkg/config"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
+	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/token_details"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/token_price"
 )
-
-type Session struct {
-	Config Config
-	Client httpclient.Request
-}
 
 type Unmarshal struct {
 	token_details.TokenStore
 	token_price.PriceStore
 }
 
-func NewWithConfig(config Config) Unmarshal {
-	setDefaults(&config)
+func NewWithConfig(config conf.Config) Unmarshal {
+	conf.SetDefaults(&config)
 	httpClient := httpclient.NewHttpJSONClient(config.Environment.GetEndpoint())
 	if config.HttpClient != nil {
 		httpClient.HttpClient = config.HttpClient
 	}
 	httpClient.DefaultQuery = map[string]string{"auth_key": config.AuthKey}
-	sess := Session{Config: config, Client: httpClient}
+	sess := session.Session{Config: config, Client: httpClient}
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
 		PriceStore: token_price.New(sess),
 	}
 }
 
-func NewWithOptions(authKey string, options ...ConfigOptions) Unmarshal {
-	config := NewConfig(authKey, options...)
-	sess := Session{Config: config}
+func NewWithOptions(authKey string, options ...conf.ConfigOptions) Unmarshal {
+	config := conf.NewConfig(authKey, options...)
+	sess := session.Session{Config: config}
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
 		PriceStore: token_price.New(sess),
