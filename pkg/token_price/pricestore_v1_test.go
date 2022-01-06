@@ -98,3 +98,23 @@ func TestPriceStoreV1_GetPriceWithSymbol(t *testing.T) {
 		ast.Empty(resp, "should have an empty response for an invalid call")
 	})
 }
+
+func TestPriceStoreV1_GetLosers(t *testing.T) {
+	ps := getTestPriceStore()
+	ast := assert.New(t)
+	chain := constants.ETH
+	resp, err := ps.GetLosers(chain)
+
+	ast.NoError(err, "There should be no error for a valid call")
+	ast.NotEmpty(resp, "The response should not be empty")
+}
+
+func TestPriceStoreV1_GetGainers(t *testing.T) {
+	ps := getTestPriceStore()
+	ast := assert.New(t)
+	chain := constants.ETH
+	resp, err := ps.GetGainers(chain)
+
+	ast.NoError(err, "There should be no error for a valid call")
+	ast.NotEmpty(resp, "The response should not be empty")
+}
