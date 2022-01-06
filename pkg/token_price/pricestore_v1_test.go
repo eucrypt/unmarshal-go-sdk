@@ -50,3 +50,35 @@ func getTestPriceStore() PriceStoreV1 {
 	}{AuthKey: authKey, HttpClient: nil, Environment: constants.Prod}, Client: httpClient})
 	return PsV1
 }
+
+func TestPriceStoreV1_GetLPTokens(t *testing.T) {
+	ps := getTestPriceStore()
+	ast := assert.New(t)
+	validAddr := "0x222F93187f15F354D41Ff6a7703eF7e18cdD5103"
+	chain := constants.BSC
+	t.Run("Evaluate GetLPToken", func(t *testing.T) {
+		resp, err := ps.GetLPTokens(chain, validAddr)
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+
+		resp, _ = ps.GetLPTokens(chain, "")
+		ast.Empty(resp, "should have an empty response for an invalid call")
+	})
+}
+
+func TestPriceStoreV1_GetTokensPrice(t *testing.T) {
+	ps := getTestPriceStore()
+	ast := assert.New(t)
+	validAddr := []string{"0x2fa5daf6fe0708fbd63b1a7d1592577284f52256", "0xad29abb318791d579433d831ed122afeaf29dcfe"}
+	chain := constants.BSC
+	t.Run("Evaluate GetTokensPrice", func(t *testing.T) {
+		resp, err := ps.GetTokensPrice(chain, validAddr)
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+
+		resp, _ = ps.GetTokensPrice(chain, nil)
+		ast.Empty(resp, "should have an empty response for an invalid call")
+	})
+}
