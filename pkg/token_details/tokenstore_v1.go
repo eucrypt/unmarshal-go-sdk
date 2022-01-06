@@ -25,9 +25,9 @@ func (t TokenStoreV1) GetTokenDetailsWithContract(contractAddress string) (resp 
 
 func (t TokenStoreV1) GetTokenList(queryParams map[string]string) (resp GetTokenListResponse, err error) {
 	path := strings.Join([]string{TokenStoreV1Path, "all"}, "/")
-	var urlVals = new(url.Values)
-	httpclient.QueryParamHelper(queryParams, urlVals)
-	err = t.sess.Client.Get(&resp, path, *urlVals)
+	var urlVals = make(url.Values)
+	httpclient.QueryParamHelper(queryParams, &urlVals)
+	err = t.sess.Client.Get(&resp, path, urlVals)
 	return
 }
 

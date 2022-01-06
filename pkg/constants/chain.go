@@ -6,7 +6,7 @@ type Chain string
 type APIName string
 
 const (
-	ETH    Chain = "eth"
+	ETH    Chain = "ethereum"
 	BSC    Chain = "bsc"
 	MATIC  Chain = "matic"
 	XDC    Chain = "xinfin"
