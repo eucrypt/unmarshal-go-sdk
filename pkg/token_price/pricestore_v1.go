@@ -20,7 +20,7 @@ func New(sess session.Session) PriceStoreV1 {
 const PriceStoreV1Path = "v1/pricestore"
 
 func (p PriceStoreV1) GetPriceAtInstant(chain constants.Chain, contractAddress string, timestamp int64) (resp TokenPrice, err error) {
-	if !constants.GetTokensPrice.IsAllowedToCallOnChain(chain) {
+	if !constants.GetTokensPrice.SupportsChain(chain) {
 		return TokenPrice{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), contractAddress}, "/")
@@ -33,7 +33,7 @@ func (p PriceStoreV1) GetPriceAtInstant(chain constants.Chain, contractAddress s
 }
 
 func (p PriceStoreV1) GetCurrentPrice(chain constants.Chain, contractAddress string) (resp TokenPrice, err error) {
-	if !constants.GetTokensPrice.IsAllowedToCallOnChain(chain) {
+	if !constants.GetTokensPrice.SupportsChain(chain) {
 		return TokenPrice{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), contractAddress}, "/")
@@ -44,7 +44,7 @@ func (p PriceStoreV1) GetCurrentPrice(chain constants.Chain, contractAddress str
 }
 
 func (p PriceStoreV1) GetGainers(chain constants.Chain) (resp TokenDetailsResp, err error) {
-	if !constants.GetGainers.IsAllowedToCallOnChain(chain) {
+	if !constants.GetGainers.SupportsChain(chain) {
 		return TokenDetailsResp{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "gainers"}, "/")
@@ -55,7 +55,7 @@ func (p PriceStoreV1) GetGainers(chain constants.Chain) (resp TokenDetailsResp, 
 }
 
 func (p PriceStoreV1) GetLosers(chain constants.Chain) (resp TokenDetailsResp, err error) {
-	if !constants.GetLosers.IsAllowedToCallOnChain(chain) {
+	if !constants.GetLosers.SupportsChain(chain) {
 		return TokenDetailsResp{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "losers"}, "/")
@@ -66,7 +66,7 @@ func (p PriceStoreV1) GetLosers(chain constants.Chain) (resp TokenDetailsResp, e
 }
 
 func (p PriceStoreV1) GetLPTokens(chain constants.Chain, lptoken string) (resp TokenListWithPrice, err error) {
-	if !constants.GetLpTokenPrice.IsAllowedToCallOnChain(chain) {
+	if !constants.GetLpTokenPrice.SupportsChain(chain) {
 		return TokenListWithPrice{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "lptokens"}, "/")
@@ -80,7 +80,7 @@ func (p PriceStoreV1) GetLPTokens(chain constants.Chain, lptoken string) (resp T
 }
 
 func (p PriceStoreV1) GetTokensPrice(chain constants.Chain, tokenList []string) (resp TokenListWithPrice, err error) {
-	if !constants.GetTokensPrice.IsAllowedToCallOnChain(chain) {
+	if !constants.GetTokensPrice.SupportsChain(chain) {
 		return TokenListWithPrice{}, constants.UnsupportedChainError
 	}
 	path := strings.Join([]string{PriceStoreV1Path, "chain", chain.String(), "tokens"}, "/")

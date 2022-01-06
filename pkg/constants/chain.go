@@ -37,8 +37,8 @@ func (c Chain) String() string {
 	return string(c)
 }
 
-//IsAllowedToCallOnChain Allows a caller to know if a chain specific API supports a passed valid chain
-func (api APIName) IsAllowedToCallOnChain(chain Chain) bool {
+//SupportsChain Allows a caller to know if a chain specific API supports a passed valid chain
+func (api APIName) SupportsChain(chain Chain) bool {
 	if allowedCallersByAPI[api] == nil {
 		return false
 	}
