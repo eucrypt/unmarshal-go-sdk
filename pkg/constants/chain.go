@@ -19,6 +19,7 @@ const (
 	GetLpTokenPrice     APIName = "GetLpTokenPrice"
 	GetLosers           APIName = "GetLosers"
 	GetGainers          APIName = "GetGainers"
+	GetAssets           APIName = "GetAssets"
 )
 
 //This should be manually changed when a new chain starts being supported
@@ -30,6 +31,7 @@ var allowedCallersByAPI = map[APIName]map[Chain]bool{
 	GetLpTokenPrice:     allChainsTrue,
 	GetLosers:           allChainsTrue,
 	GetGainers:          allChainsTrue,
+	GetAssets:           allChainsTrue,
 }
 
 //String returns the string specific version of the chain
