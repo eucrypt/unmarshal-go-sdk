@@ -22,6 +22,7 @@ func NewWithConfig(config Config) Unmarshal {
 	if config.HttpClient != nil {
 		httpClient.HttpClient = config.HttpClient
 	}
+	httpClient.DefaultQuery = map[string]string{"auth_key": config.AuthKey}
 	sess := Session{Config: config, Client: httpClient}
 	return Unmarshal{
 		TokenStore: token_details.New(sess),
