@@ -19,7 +19,7 @@ func New(sess session.Session) PriceStoreV1 {
 
 const PriceStoreV1Path = "v1/pricestore"
 
-func (p PriceStoreV1) GetPriceAtInstant(contractAddress string, chain constants.Chain, timestamp int64) (resp TokenPrice, err error) {
+func (p PriceStoreV1) GetPriceAtInstant(chain constants.Chain, contractAddress string, timestamp int64) (resp TokenPrice, err error) {
 	if !constants.GetTokensPrice.IsAllowedToCallOnChain(chain) {
 		return TokenPrice{}, constants.UnsupportedChainError
 	}
@@ -32,7 +32,7 @@ func (p PriceStoreV1) GetPriceAtInstant(contractAddress string, chain constants.
 	return
 }
 
-func (p PriceStoreV1) GetCurrentPrice(contractAddress string, chain constants.Chain) (resp TokenPrice, err error) {
+func (p PriceStoreV1) GetCurrentPrice(chain constants.Chain, contractAddress string) (resp TokenPrice, err error) {
 	if !constants.GetTokensPrice.IsAllowedToCallOnChain(chain) {
 		return TokenPrice{}, constants.UnsupportedChainError
 	}
@@ -87,6 +87,13 @@ func (p PriceStoreV1) GetTokensPrice(chain constants.Chain, tokenList []string) 
 	var urlVals = httpclient.QueryParamHelper(map[string]interface{}{
 		"tokens": tokenList,
 	})
+	err = p.sess.Client.Get(&resp, path, urlVals)
+
+	return
+}
+func (p PriceStoreV1) GetPriceWithSymbol(symbol string) (resp PriceWithSymbolResp, err error) {
+	path := strings.Join([]string{PriceStoreV1Path, symbol}, "/")
+	var urlVals = make(url.Values)
 	err = p.sess.Client.Get(&resp, path, urlVals)
 
 	return

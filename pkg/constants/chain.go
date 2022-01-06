@@ -21,7 +21,9 @@ const (
 	GetGainers          APIName = "GetGainers"
 )
 
+//This should be manually changed when a new chain starts being supported
 var allChainsTrue = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOLANA: true}
+
 var allowedCallersByAPI = map[APIName]map[Chain]bool{
 	GetPriceWithAddress: allChainsTrue,
 	GetTokensPrice:      allChainsTrue,
