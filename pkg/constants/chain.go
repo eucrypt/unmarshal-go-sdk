@@ -6,11 +6,11 @@ type Chain string
 type APIName string
 
 const (
-	ETH    Chain = "ethereum"
-	BSC    Chain = "bsc"
-	MATIC  Chain = "matic"
-	XDC    Chain = "xinfin"
-	SOLANA Chain = "solana"
+	ETH   Chain = "ethereum"
+	BSC   Chain = "bsc"
+	MATIC Chain = "matic"
+	XDC   Chain = "xinfin"
+	SOL   Chain = "solana"
 )
 
 const (
@@ -22,7 +22,7 @@ const (
 )
 
 //This should be manually changed when a new chain starts being supported
-var allChainsTrue = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOLANA: true}
+var allChainsTrue = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOL: true}
 
 var allowedCallersByAPI = map[APIName]map[Chain]bool{
 	GetPriceWithAddress: allChainsTrue,
