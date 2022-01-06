@@ -65,23 +65,24 @@ var DefaultErrorHandler = func(res *http.Response, uri string) error {
 }
 
 func (r *Request) GetWithContext(result interface{}, path string, query url.Values, ctx context.Context) error {
-	r.AppendDefaultQuery(&query)
-	var queryStr = ""
-	if query != nil {
-		queryStr = query.Encode()
-	}
+	queryStr := r.safeGetQueryStrWithDefaults(query)
 	uri := strings.Join([]string{r.GetBase(path), queryStr}, "?")
 	return r.Execute("GET", uri, nil, result, ctx)
 }
 
 func (r *Request) Get(result interface{}, path string, query url.Values) error {
-	r.AppendDefaultQuery(&query)
-	var queryStr = ""
-	if query != nil {
-		queryStr = query.Encode()
-	}
+	queryStr := r.safeGetQueryStrWithDefaults(query)
 	uri := strings.Join([]string{r.GetBase(path), queryStr}, "?")
 	return r.Execute("GET", uri, nil, result, context.Background())
+}
+
+func (r *Request) safeGetQueryStrWithDefaults(query url.Values) string {
+	if query == nil {
+		query = make(url.Values)
+	}
+	r.AppendDefaultQuery(&query)
+
+	return query.Encode()
 }
 
 func (r *Request) Post(result interface{}, path string, body interface{}) error {
