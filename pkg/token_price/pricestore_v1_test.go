@@ -10,6 +10,7 @@ import (
 	"testing"
 )
 
+//@dev before a run set your AUTH_KEY env
 func TestPriceStoreV1_GetPrice(t1 *testing.T) {
 	ps := getTestPriceStore()
 	ast := assert.New(t1)
