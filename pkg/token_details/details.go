@@ -2,6 +2,7 @@ package token_details
 
 import (
 	"github.com/eucrypt/unmarshal-go-sdk/pkg"
+	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"net/url"
 	"strings"
 )
@@ -25,11 +26,7 @@ func (t TokenStoreV1) GetTokenDetailsWithContract(contractAddress string) (resp 
 func (t TokenStoreV1) GetTokenList(queryParams map[string]string) (resp GetTokenListResponse, err error) {
 	path := strings.Join([]string{TokenStoreV1Path, "all"}, "/")
 	var urlVals = new(url.Values)
-	if queryParams != nil {
-		for key, val := range queryParams {
-			urlVals.Add(key, val)
-		}
-	}
+	httpclient.QueryParamHelper(queryParams, urlVals)
 	err = t.sess.Client.Get(&resp, path, *urlVals)
 	return
 }

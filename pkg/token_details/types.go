@@ -2,7 +2,7 @@ package token_details
 
 type TokenStore interface {
 	GetTokenDetailsWithContract(contractAddress string) (TokenDetails, error)
-	GetTokenList(map[string]string) (GetTokenListResponse, error)
+	GetTokenList(int, int) (GetTokenListResponse, error)
 	GetTokenWithSymbol(string) ([]TokenDetails, error)
 }
 

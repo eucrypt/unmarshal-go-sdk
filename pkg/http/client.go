@@ -145,3 +145,11 @@ func GetBody(body interface{}) (buf io.ReadWriter, err error) {
 	}
 	return
 }
+
+func QueryParamHelper(queryParams map[string]string, urlVals *url.Values) {
+	if queryParams != nil {
+		for key, val := range queryParams {
+			urlVals.Add(key, val)
+		}
+	}
+}
