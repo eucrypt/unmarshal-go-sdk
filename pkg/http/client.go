@@ -1,5 +1,6 @@
 package httpclient
 
+import "C"
 import (
 	"bytes"
 	"context"
@@ -159,10 +160,17 @@ func GetBody(body interface{}) (buf io.ReadWriter, err error) {
 	return
 }
 
-func QueryParamHelper(queryParams map[string]string, urlVals *url.Values) {
+func QueryParamHelper(queryParams map[string]interface{}) (urlVals url.Values) {
 	if queryParams != nil {
+		urlVals = make(url.Values)
 		for key, val := range queryParams {
-			urlVals.Add(key, val)
+			switch val.(type) {
+			default:
+				urlVals.Add(key, val.(string))
+			case []string:
+				urlVals[key] = val.([]string)
+			}
 		}
 	}
+	return
 }
