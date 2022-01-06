@@ -1,9 +1,9 @@
 package token_details
 
 import (
+	"fmt"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
-	"net/url"
 	"strings"
 )
 
@@ -23,10 +23,13 @@ func (t TokenStoreV1) GetTokenDetailsWithContract(contractAddress string) (resp 
 	return
 }
 
-func (t TokenStoreV1) GetTokenList(queryParams map[string]string) (resp GetTokenListResponse, err error) {
+func (t TokenStoreV1) GetTokenList(pageNumber int, pageSize int) (resp GetTokenListResponse, err error) {
 	path := strings.Join([]string{TokenStoreV1Path, "all"}, "/")
-	var urlVals = make(url.Values)
-	httpclient.QueryParamHelper(queryParams, &urlVals)
+	vals := map[string]interface{}{
+		"pageNumber": fmt.Sprint(pageNumber),
+		"pageSize":   fmt.Sprint(pageSize),
+	}
+	var urlVals = httpclient.QueryParamHelper(vals)
 	err = t.sess.Client.Get(&resp, path, urlVals)
 	return
 }
