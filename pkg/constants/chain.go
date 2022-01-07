@@ -6,11 +6,13 @@ type Chain string
 type APIName string
 
 const (
-	ETH   Chain = "ethereum"
-	BSC   Chain = "bsc"
-	MATIC Chain = "matic"
-	XDC   Chain = "xinfin"
-	SOL   Chain = "solana"
+	ETH     Chain = "ethereum"
+	BSC     Chain = "bsc"
+	MATIC   Chain = "matic"
+	XDC     Chain = "xinfin"
+	SOL     Chain = "solana"
+	ZILLIQA Chain = "zilliqa"
+	HUOBI   Chain = "heco"
 )
 
 const (
@@ -27,7 +29,7 @@ const (
 )
 
 //This should be manually changed when a new chain starts being supported
-var allChains = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOL: true}
+var allChains = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOL: true, ZILLIQA: true, HUOBI: true}
 
 var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
 
