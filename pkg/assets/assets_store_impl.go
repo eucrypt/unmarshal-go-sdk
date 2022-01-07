@@ -15,6 +15,8 @@ func New(sess session.Session) V1Store {
 	return V1Store{sess: sess}
 }
 
+//GetAssets accepts the chain and address and returns the assets of the address on the chain. It includes,
+//in addition to the native token balances, all ERC20 assets (EVM chains) or SPL tokens (Solana)
 func (a V1Store) GetAssets(chain constants.Chain, address string) (response types.AssetDetailsV1Resp, err error) {
 	if !constants.Assets_GetAssets.SupportsChain(chain) {
 		return response, constants.UnsupportedChainError
