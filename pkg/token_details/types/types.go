@@ -1,4 +1,4 @@
-package token_details
+package types
 
 type TokenDetails struct {
 	Name        string `json:"name"`

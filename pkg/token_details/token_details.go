@@ -1,7 +1,9 @@
 package token_details
 
-type TokenStore interface {
-	GetTokenDetailsWithContract(contractAddress string) (TokenDetails, error)
-	GetTokenList(pageNumber int, pageSize int) (GetTokenListResponse, error)
-	GetTokenWithSymbol(string) ([]TokenDetails, error)
+import "github.com/eucrypt/unmarshal-go-sdk/pkg/token_details/types"
+
+type TokenDetails interface {
+	GetDetailsWithContract(contractAddress string) (types.TokenDetails, error)
+	GetTokenList(pageNumber int, pageSize int) (types.GetTokenListResponse, error)
+	GetTokenWithSymbol(string) ([]types.TokenDetails, error)
 }

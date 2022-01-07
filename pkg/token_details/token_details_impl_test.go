@@ -17,13 +17,13 @@ func TestTokenStoreV1_GetTokenDetailsWithContract(t *testing.T) {
 	ValidContract := "0x5a666c7d92e5fa7edcb6390e4efd6d0cdd69cf37"
 	ast := assert.New(t)
 	t.Run("Evaluating get Token Details with valid data", func(t *testing.T) {
-		resp, err := ts.GetTokenDetailsWithContract(ValidContract)
+		resp, err := ts.GetDetailsWithContract(ValidContract)
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 	})
 
 	t.Run("Evaluating get Token Details with invalid data", func(t *testing.T) {
-		resp, _ := ts.GetTokenDetailsWithContract("")
+		resp, _ := ts.GetDetailsWithContract("")
 		ast.Empty(resp, "The response should be empty for invalid data")
 	})
 

@@ -40,7 +40,7 @@ func TestPriceStoreV1_GetPrice(t1 *testing.T) {
 
 }
 
-func getTestPriceStore() PriceStoreV1 {
+func getTestPriceStore() PriceStoreImpl {
 	httpClient := httpclient.NewHttpJSONClient(constants.Environment.GetEndpoint("prod"))
 	authKey := os.Getenv("API_KEY")
 	httpClient.DefaultQuery = map[string]string{"auth_key": authKey}
@@ -73,7 +73,7 @@ func TestPriceStoreV1_GetTokensPrice(t *testing.T) {
 	ast := assert.New(t)
 	validAddr := []string{"0x2fa5daf6fe0708fbd63b1a7d1592577284f52256", "0xad29abb318791d579433d831ed122afeaf29dcfe"}
 	chain := constants.BSC
-	t.Run("Evaluate GetTokensPrice", func(t *testing.T) {
+	t.Run("Evaluate PS_GetTokensPrice", func(t *testing.T) {
 		resp, err := ps.GetTokensPrice(chain, validAddr)
 
 		ast.NoError(err, "There should be no error for a valid call")
