@@ -9,7 +9,7 @@ import (
 )
 
 type Unmarshal struct {
-	token_details.TokenStore
+	token_details.TokenDetails
 	token_price.PriceStore
 }
 
@@ -22,8 +22,8 @@ func NewWithConfig(config conf.Config) Unmarshal {
 	httpClient.DefaultQuery = map[string]string{"auth_key": config.AuthKey}
 	sess := session.Session{Config: config, Client: httpClient}
 	return Unmarshal{
-		TokenStore: token_details.New(sess),
-		PriceStore: token_price.New(sess),
+		TokenDetails: token_details.New(sess),
+		PriceStore:   token_price.New(sess),
 	}
 }
 
@@ -31,7 +31,7 @@ func NewWithOptions(authKey string, options ...conf.ConfigOptions) Unmarshal {
 	config := conf.NewConfig(authKey, options...)
 	sess := session.Session{Config: config}
 	return Unmarshal{
-		TokenStore: token_details.New(sess),
-		PriceStore: token_price.New(sess),
+		TokenDetails: token_details.New(sess),
+		PriceStore:   token_price.New(sess),
 	}
 }

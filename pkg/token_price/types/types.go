@@ -1,4 +1,4 @@
-package token_price
+package types
 
 type TokenPrice struct {
 	TokenId   string `json:"tokenId"`

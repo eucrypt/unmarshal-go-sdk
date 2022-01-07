@@ -14,23 +14,25 @@ const (
 )
 
 const (
-	GetPriceWithAddress APIName = "GetPriceWithAddress"
-	GetTokensPrice      APIName = "GetTokensPrice"
-	GetLpTokenPrice     APIName = "GetLpTokenPrice"
-	GetLosers           APIName = "GetLosers"
-	GetGainers          APIName = "GetGainers"
+	PS_GetPriceWithAddress    APIName = "v1/pricestore/chain/:chain/:address"
+	PS_GetTokensPrice         APIName = "v1/pricestore/chain/:chain/tokens"
+	PS_GetLpTokenPrice        APIName = "v1/pricestore/chain/:chain/lptokens"
+	PS_GetLosers              APIName = "v1/pricestore/chain/:chain/losers"
+	PS_GetGainers             APIName = "v1/pricestore/chain/:chain/gainers"
+	PS_GetPriceWithSymbol     APIName = "v1/pricestore/:symbol"
+	TS_GetDetailsWithContract APIName = "v1/tokenstore/token/address/:address"
+	TS_GetTokenList           APIName = "v1/tokenstore/token/all"
+	TS_GetTokenWithSymbol     APIName = "v1/tokenstore/token/symbol/:symbol"
 )
 
-//This should be manually changed when a new chain starts being supported
-var allChains = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOL: true}
-
 var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
+
 var allowedCallersByAPI = map[APIName]map[Chain]bool{
-	GetPriceWithAddress: priceStoreSupported,
-	GetTokensPrice:      priceStoreSupported,
-	GetLpTokenPrice:     priceStoreSupported,
-	GetLosers:           priceStoreSupported,
-	GetGainers:          priceStoreSupported,
+	PS_GetPriceWithAddress: priceStoreSupported,
+	PS_GetTokensPrice:      priceStoreSupported,
+	PS_GetLpTokenPrice:     priceStoreSupported,
+	PS_GetLosers:           priceStoreSupported,
+	PS_GetGainers:          priceStoreSupported,
 }
 
 //String returns the string specific version of the chain
@@ -45,6 +47,10 @@ func (api APIName) SupportsChain(chain Chain) bool {
 	}
 
 	return allowedCallersByAPI[api][chain]
+}
+
+func (api APIName) GetURI() string {
+	return string(api)
 }
 
 var UnsupportedChainError = errors.New("unsupported Chain for API")
