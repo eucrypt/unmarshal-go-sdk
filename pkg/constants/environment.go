@@ -8,8 +8,8 @@ const (
 )
 
 var endpointMap = map[Environment]string{
-	Prod:  "https://api.unmarshal.io/",
-	Stage: "https://stg-api.unmarshal.io/",
+	Prod:  "https://api.unmarshal.com",
+	Stage: "https://stg-api.unmarshal.com",
 }
 
 func (e Environment) GetEndpoint() string {

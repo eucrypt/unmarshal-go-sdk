@@ -1,5 +1,6 @@
 package httpclient
 
+import "C"
 import (
 	"bytes"
 	"context"
@@ -63,24 +64,30 @@ var DefaultErrorHandler = func(res *http.Response, uri string) error {
 	return errors.New("error in making request")
 }
 
+//GetWithContext makes and HTTP GET call with the provided values after appending the default query values
+//in additon to any existing ones.
 func (r *Request) GetWithContext(result interface{}, path string, query url.Values, ctx context.Context) error {
-	r.AppendDefaultQuery(&query)
-	var queryStr = ""
-	if query != nil {
-		queryStr = query.Encode()
-	}
+	queryStr := r.safeGetQueryStrWithDefaults(query)
 	uri := strings.Join([]string{r.GetBase(path), queryStr}, "?")
 	return r.Execute("GET", uri, nil, result, ctx)
 }
 
+//GET makes an HTTP GET call after appending the default query values in additon to the existing ones.
 func (r *Request) Get(result interface{}, path string, query url.Values) error {
-	r.AppendDefaultQuery(&query)
-	var queryStr = ""
-	if query != nil {
-		queryStr = query.Encode()
-	}
+	queryStr := r.safeGetQueryStrWithDefaults(query)
 	uri := strings.Join([]string{r.GetBase(path), queryStr}, "?")
 	return r.Execute("GET", uri, nil, result, context.Background())
+}
+
+//safeGetQueryStrWithDefaults appends the default queries (auth key and other specified data) with creating a panic.
+//It returns the URL encoded query string ( "auth_key=value&item=value ..." )
+func (r *Request) safeGetQueryStrWithDefaults(query url.Values) string {
+	if query == nil {
+		query = make(url.Values)
+	}
+	r.AppendDefaultQuery(&query)
+
+	return query.Encode()
 }
 
 func (r *Request) Post(result interface{}, path string, body interface{}) error {
@@ -142,6 +149,7 @@ func (r *Request) GetBase(path string) string {
 	return fmt.Sprintf("%s/%s", r.BaseUrl, path)
 }
 
+//AppendDefaultQuery add the specified default query values to a query
 func (r *Request) AppendDefaultQuery(query *url.Values) {
 	for k, v := range r.DefaultQuery {
 		if existingValue := query.Get(k); len(existingValue) > 0 {
@@ -155,6 +163,24 @@ func GetBody(body interface{}) (buf io.ReadWriter, err error) {
 	if body != nil {
 		buf = new(bytes.Buffer)
 		err = json.NewEncoder(buf).Encode(body)
+	}
+	return
+}
+
+//QueryParamHelper accepts a map of string -> interface and returns the supported url.Values for the map.
+//It will assume any data that is not a []string is instead a string value.
+//This is because, url.Values is compatible only with Strings or string arrays.
+func QueryParamHelper(queryParams map[string]interface{}) (urlVals url.Values) {
+	if queryParams != nil {
+		urlVals = make(url.Values)
+		for key, val := range queryParams {
+			switch val.(type) {
+			default:
+				urlVals.Add(key, val.(string))
+			case []string:
+				urlVals[key] = val.([]string)
+			}
+		}
 	}
 	return
 }
