@@ -26,12 +26,18 @@ const (
 	TS_GetTokenList           APIName = "v1/tokenstore/token/all"
 	TS_GetTokenWithSymbol     APIName = "v1/tokenstore/token/symbol/:symbol"
 	Assets_GetAssets          APIName = "v1/:chain/address/:address/assets"
+	NFT_GetAssets             APIName = "v1/:chain/address/:address/nft-assets"
+	NFT_GetTxns               APIName = "v1/:chain/address/:address/nft-transactions"
+	NFT_GetDetailsWithID      APIName = "v1/:chain/address/:address/details"
+	NFT_GetHoldersByID        APIName = "v1/:chain/address/:address/nftholders"
 )
 
 //This should be manually changed when a new chain starts being supported
 var allChains = map[Chain]bool{ETH: true, BSC: true, MATIC: true, XDC: true, SOL: true, ZILLIQA: true, HUOBI: true}
 
 var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
+
+var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
 
 var allowedCallersByAPI = map[APIName]map[Chain]bool{
 	PS_GetPriceWithAddress: priceStoreSupported,
@@ -40,6 +46,10 @@ var allowedCallersByAPI = map[APIName]map[Chain]bool{
 	PS_GetLosers:           priceStoreSupported,
 	PS_GetGainers:          priceStoreSupported,
 	Assets_GetAssets:       allChains,
+	NFT_GetAssets:          {ETH: true, BSC: true, MATIC: true, SOL: true},
+	NFT_GetTxns:            nftEVMSupport,
+	NFT_GetDetailsWithID:   nftEVMSupport,
+	NFT_GetHoldersByID:     nftEVMSupport,
 }
 
 //String returns the string specific version of the chain

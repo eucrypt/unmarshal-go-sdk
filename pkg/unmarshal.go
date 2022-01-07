@@ -4,6 +4,7 @@ import (
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/assets"
 	conf "github.com/eucrypt/unmarshal-go-sdk/pkg/config"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
+	"github.com/eucrypt/unmarshal-go-sdk/pkg/nft_details"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/token_details"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/token_price"
@@ -13,6 +14,7 @@ type Unmarshal struct {
 	token_details.TokenDetails
 	token_price.PriceStore
 	assets.Assets
+	nft_details.NftDetails
 }
 
 func NewWithConfig(config conf.Config) Unmarshal {
@@ -27,6 +29,7 @@ func NewWithConfig(config conf.Config) Unmarshal {
 		TokenDetails: token_details.New(sess),
 		PriceStore:   token_price.New(sess),
 		Assets:       assets.New(sess),
+		NftDetails:   nft_details.New(sess),
 	}
 }
 
@@ -36,6 +39,7 @@ func NewWithOptions(authKey string, options ...conf.ConfigOptions) Unmarshal {
 	return Unmarshal{
 		TokenDetails: token_details.New(sess),
 		PriceStore:   token_price.New(sess),
-		Assets:     assets.New(sess),
+		Assets:       assets.New(sess),
+		NftDetails:   nft_details.New(sess),
 	}
 }
