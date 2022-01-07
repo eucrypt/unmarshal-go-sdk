@@ -1,4 +1,4 @@
-package assets
+package types
 
 type AssetDetailsV1 struct {
 	ContractName         string  `json:"contract_name"`
