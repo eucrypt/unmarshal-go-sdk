@@ -26,6 +26,10 @@ func TestPriceStoreV1_GetPrice(t1 *testing.T) {
 
 		resp, _ = ps.GetPriceAtInstant(chain, "invalidAddr", time)
 		ast.Empty(resp, "should have an empty response for an invalid call")
+
+		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
+		_, err = ps.GetPriceAtInstant(constants.HUOBI, "", 0)
+		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 	})
 
 	t1.Run("Evaluate Get  Current Price", func(t *testing.T) {
@@ -36,6 +40,10 @@ func TestPriceStoreV1_GetPrice(t1 *testing.T) {
 
 		resp, _ = ps.GetCurrentPrice(chain, "invalidAddr")
 		ast.Empty(resp, "should have an empty response for an invalid call")
+
+		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
+		_, err = ps.GetCurrentPrice(constants.HUOBI, "")
+		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 	})
 
 }
@@ -65,6 +73,10 @@ func TestPriceStoreV1_GetLPTokens(t *testing.T) {
 
 		resp, _ = ps.GetLPTokens(chain, "")
 		ast.Empty(resp, "should have an empty response for an invalid call")
+
+		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
+		_, err = ps.GetLPTokens(constants.HUOBI, "")
+		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 	})
 }
 
@@ -107,6 +119,10 @@ func TestPriceStoreV1_GetLosers(t *testing.T) {
 
 	ast.NoError(err, "There should be no error for a valid call")
 	ast.NotEmpty(resp, "The response should not be empty")
+
+	//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
+	_, err = ps.GetLosers(constants.HUOBI)
+	ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 }
 
 func TestPriceStoreV1_GetGainers(t *testing.T) {
@@ -117,4 +133,8 @@ func TestPriceStoreV1_GetGainers(t *testing.T) {
 
 	ast.NoError(err, "There should be no error for a valid call")
 	ast.NotEmpty(resp, "The response should not be empty")
+
+	//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
+	_, err = ps.GetGainers(constants.HUOBI)
+	ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 }
