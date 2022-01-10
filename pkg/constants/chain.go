@@ -76,4 +76,9 @@ func (api APIName) GetURI() string {
 	return string(api)
 }
 
-var UnsupportedChainError = errors.New("unsupported Chain for API")
+//GetSupportedChains fetches all chains that an API supports as a map of Chain -> bool
+func (api APIName) GetSupportedChains() map[Chain]bool {
+	return allowedCallersByAPI[api]
+}
+
+var UnsupportedChainError = errors.New("unsupported chain for API")
