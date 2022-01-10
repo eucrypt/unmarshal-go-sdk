@@ -25,7 +25,7 @@ const (
 	TS_GetDetailsWithContract APIName = "v1/tokenstore/token/address/:address"
 	TS_GetTokenList           APIName = "v1/tokenstore/token/all"
 	TS_GetTokenWithSymbol     APIName = "v1/tokenstore/token/symbol/:symbol"
-	Assets_GetAssets          APIName = "v1/:chain/address/:address/assets"
+	ASSETS_GetAssets          APIName = "v1/:chain/address/:address/assets"
 	NFT_GetAssets             APIName = "v1/:chain/address/:address/nft-assets"
 	NFT_GetTxns               APIName = "v1/:chain/address/:address/nft-transactions"
 	NFT_GetDetailsWithID      APIName = "v1/:chain/address/:address/details"
@@ -45,7 +45,7 @@ var allowedCallersByAPI = map[APIName]map[Chain]bool{
 	PS_GetLpTokenPrice:     priceStoreSupported,
 	PS_GetLosers:           priceStoreSupported,
 	PS_GetGainers:          priceStoreSupported,
-	Assets_GetAssets:       allChains,
+	ASSETS_GetAssets:       allChains,
 	NFT_GetAssets:          {ETH: true, BSC: true, MATIC: true, SOL: true},
 	NFT_GetTxns:            nftEVMSupport,
 	NFT_GetDetailsWithID:   nftEVMSupport,
