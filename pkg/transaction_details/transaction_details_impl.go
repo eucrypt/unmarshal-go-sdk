@@ -18,6 +18,8 @@ func New(sess session.Session) TxnDetailsImpl {
 	return TxnDetailsImpl{sess: sess}
 }
 
+//GetTokenTxns Gets all the token transactions for a particular address,
+//the options param allows filtering based on contract with options for pagination as well
 func (txn TxnDetailsImpl) GetTokenTxns(chain constants.Chain, address string, options *TokenTxnsOpts) (
 	resp types.TokenTxn, err error) {
 
@@ -35,6 +37,7 @@ func (txn TxnDetailsImpl) GetTokenTxns(chain constants.Chain, address string, op
 	return
 }
 
+//GetTxnDetails accepts a transaction signature or ID and returns transaction details if available.
 func (txn TxnDetailsImpl) GetTxnDetails(chain constants.Chain, txnID string) (resp types.TxnByID, err error) {
 	if !constants.TXN_GetTxnDetails.SupportsChain(chain) {
 		return types.TxnByID{}, constants.UnsupportedChainError
@@ -47,6 +50,8 @@ func (txn TxnDetailsImpl) GetTxnDetails(chain constants.Chain, txnID string) (re
 	return
 }
 
+//GetTokenTxnsV2 Gets all the token transactions for a particular address along with pricing data,
+//the options param allows filtering based on contract with options for pagination as well
 func (txn TxnDetailsImpl) GetTokenTxnsV2(chain constants.Chain, address string, options *TokenTxnsOpts) (
 	resp types.TokenTxnV2, err error) {
 	if !constants.TXN_GetTokenTxnsV2.SupportsChain(chain) {
