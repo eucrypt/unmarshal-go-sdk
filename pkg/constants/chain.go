@@ -30,6 +30,9 @@ const (
 	NFT_GetTxns               APIName = "v1/:chain/address/:address/nft-transactions"
 	NFT_GetDetailsWithID      APIName = "v1/:chain/address/:address/details"
 	NFT_GetHoldersByID        APIName = "v1/:chain/address/:address/nftholders"
+	TXN_GetTokenTxns          APIName = "v1/:chain/address/:address/transactions"
+	TXN_GetTxnDetails         APIName = "v1/:chain/transactions/:txnID"
+	TXN_GetTokenTxnsV2        APIName = "v2/:chain/address/:address/transactions"
 )
 
 //This should be manually changed when a new chain starts being supported
@@ -50,6 +53,9 @@ var allowedCallersByAPI = map[APIName]map[Chain]bool{
 	NFT_GetTxns:            nftEVMSupport,
 	NFT_GetDetailsWithID:   nftEVMSupport,
 	NFT_GetHoldersByID:     nftEVMSupport,
+	TXN_GetTokenTxns:       {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, XDC: true},
+	TXN_GetTxnDetails:      {ETH: true, BSC: true, MATIC: true, SOL: true, XDC: true},
+	TXN_GetTokenTxnsV2:     {ETH: true, BSC: true, XDC: true},
 }
 
 //String returns the string specific version of the chain
