@@ -7,14 +7,12 @@ type Protocol string
 const (
 	PancakeswapV1 Protocol = "pancakeswap_v1"
 	PancakeswapV2 Protocol = "pancakeswap_v2"
-	Uniswap       Protocol = "uniswap"
 	UniswapV2     Protocol = "uniswap_v2"
 )
 
 var allProtocols = map[Protocol]bool{
 	PancakeswapV1: true,
 	PancakeswapV2: true,
-	Uniswap:       true,
 	UniswapV2:     true,
 }
 var allowedCallersByProtocol = map[APIName]map[Protocol]bool{
