@@ -1,6 +1,5 @@
 package httpclient
 
-import "C"
 import (
 	"bytes"
 	"context"
