@@ -20,7 +20,7 @@ func TestProtocolDetailsImpl_GetPairs(t *testing.T) {
 		resp, err := protoObj.GetPairs(validProtocol)
 
 		ast.NoError(err, "There should be no error for a valid call")
-		ast.NotEmpty(resp, "The response should not be empty")
+		ast.NotEmpty(resp.ProtocolPairs, "The response should not be empty")
 	})
 }
 
@@ -29,13 +29,13 @@ func TestProtocolDetailsImpl_GetPositions(t *testing.T) {
 	ast := assert.New(t)
 
 	t.Run("Evaluating Get Pairs with valid data", func(t *testing.T) {
-		validProtocol := constants.PancakeswapV2
+		validProtocol := constants.UniswapV2
 		validAddress := "demo.eth"
 
 		resp, err := protoObj.GetPositions(validProtocol, validAddress)
 
 		ast.NoError(err, "There should be no error for a valid call")
-		ast.NotEmpty(resp, "The response should not be empty")
+		ast.NotEmpty(resp.Positions, "The response should have valid positions")
 	})
 	t.Run("Evaluating Get Pairs with invalid data", func(t *testing.T) {
 		validProtocol := constants.PancakeswapV2
@@ -43,7 +43,8 @@ func TestProtocolDetailsImpl_GetPositions(t *testing.T) {
 
 		resp, _ := protoObj.GetPositions(validProtocol, validAddress)
 
-		ast.Empty(resp, "The response should be empty for invalid data")
+		//@dev at the time of writing, the address held 0 positions. This could change leading to a failed test
+		ast.Len(resp.Positions, 0, "The number of valid positions must be 0")
 	})
 
 }
