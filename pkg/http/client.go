@@ -71,15 +71,15 @@ func (r *Request) GetWithContext(result interface{}, path string, query url.Valu
 	return r.Execute("GET", uri, nil, result, ctx)
 }
 
-//GET makes an HTTP GET call after appending the default query values in additon to the existing ones.
+// Get makes an HTTP GET call after appending the default query values in addition to the existing ones.
 func (r *Request) Get(result interface{}, path string, query url.Values) error {
 	queryStr := r.safeGetQueryStrWithDefaults(query)
 	uri := strings.Join([]string{r.GetBase(path), queryStr}, "?")
 	return r.Execute("GET", uri, nil, result, context.Background())
 }
 
-//safeGetQueryStrWithDefaults appends the default queries (auth key and other specified data) with creating a panic.
-//It returns the URL encoded query string ( "auth_key=value&item=value ..." )
+//safeGetQueryStrWithDefaults appends the default queries (auth key and other specified data) without creating a panic.
+//It returns the URL encoded query string ( "<url>?auth_key=value&item=value ..." )
 func (r *Request) safeGetQueryStrWithDefaults(query url.Values) string {
 	if query == nil {
 		query = make(url.Values)
