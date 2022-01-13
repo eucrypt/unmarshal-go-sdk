@@ -71,7 +71,7 @@ func main() {
     Environment: constants.Prod,
   })
 
-  resp, err := sdk.GetCurrentPrice(constants.BSC, "0x222F93187f15F354D41Ff6a7703eF7e18cdD5103")
+  resp, err := sdk.GetCurrentPrice(constants.BSC, "0x2fa5daf6fe0708fbd63b1a7d1592577284f52256")
 }
 
 ```
