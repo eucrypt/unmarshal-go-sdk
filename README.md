@@ -106,7 +106,8 @@ func main() {
 
 ### Assets API ([Docs](https://docs.unmarshal.io/unmarshal-apis/token-balance-apis))
 
-- Get List of Assets - `v1/:chain/address/:address/assets` (`GetAssets`)
+- Get List of Assets
+  - `v1/:chain/address/:address/assets` (`GetAssets`)
 
 ### NFT APIs ([Docs](https://docs.unmarshal.io/nft-apis))
 
