@@ -83,19 +83,19 @@ func main() {
 ### Price Store ([Docs](https://docs.unmarshal.io))
 
 - Get Price
-  - (`GetTokenCurrentPrice`)
+  - `v1/pricestore/chain/:chain/:address` (`GetTokenCurrentPrice`)
 - Get Price at Instant
-  - (`GetTokenPriceAtInstant`)
+  - `v1/pricestore/chain/:chain/:address?timestamp=` (`GetTokenPriceAtInstant`)
 - Get Price With Symbol
-  - (`GetTokenPriceBySymbol`)
+  - `v1/pricestore/:symbol` (`GetTokenPriceBySymbol`)
 - Get Gainers
-  - (`GetTopGainers`)
+  - `v1/pricestore/chain/:chain/gainers` (`GetTopGainers`)
 - Get Losers
-  - (`GetTopLosers`)
+  - `v1/pricestore/chain/:chain/losers` (`GetTopLosers`)
 - Get LpTokens
-  - (`GetLPTokens`)
+  - `v1/pricestore/chain/:chain/lptokens` (`GetLPTokens`)
 - Get Price of List of tokens
-  - (`GetMultipleTokenPrice`)
+  - `v1/tokenstore/token/all` (`GetMultipleTokenPrice`)
 
 ### Token Details ([Docs](https://docs.unmarshal.io/token-store))
 
