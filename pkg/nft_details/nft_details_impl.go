@@ -17,18 +17,22 @@ func New(sess session.Session) NFTDetailsImpl {
 	return NFTDetailsImpl{sess: sess}
 }
 
-func (nft NFTDetailsImpl) GetAssetsByAddress(chain constants.Chain, address string) (resp types.NFTAssetsResp, err error) {
-	if !constants.NFT_GetAssets.SupportsChain(chain) {
+//GetNFTAssetsByAddress accepts a chain and address and returns the NFT assets in possession with the address.
+//For Solana it works only with the Metaplex NFTs wherein it returns assets whose metadata has a URI
+func (nft NFTDetailsImpl) GetNFTAssetsByAddress(chain constants.Chain, address string) (resp types.NFTAssetsResp, err error) {
+	if !constants.NFT_GetNFTAssets.SupportsChain(chain) {
 		return types.NFTAssetsResp{}, constants.UnsupportedChainError
 	}
-	path := strings.Replace(constants.NFT_GetAssets.GetURI(), ":chain", chain.String(), 1)
+	path := strings.Replace(constants.NFT_GetNFTAssets.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
 	err = nft.sess.Client.Get(&resp, path, nil)
 
 	return
 }
 
-func (nft NFTDetailsImpl) GetTransactionsByAddress(chain constants.Chain, address string, pageNumber int, pageSize int) (
+//GetNFTTransactionsByAddress accepts a chain, address and pagination params.
+//It returns the list of the address' NFT transactions
+func (nft NFTDetailsImpl) GetNFTTransactionsByAddress(chain constants.Chain, address string, pageNumber int, pageSize int) (
 	resp types.NFTTxnsResp, err error) {
 	if !constants.NFT_GetTxns.SupportsChain(chain) {
 		return types.NFTTxnsResp{}, constants.UnsupportedChainError
@@ -45,7 +49,8 @@ func (nft NFTDetailsImpl) GetTransactionsByAddress(chain constants.Chain, addres
 	return
 }
 
-func (nft NFTDetailsImpl) GetDetailsByID(chain constants.Chain, tokenID string, NFTAddress string) (
+//GetNFTDetailsByID accepts the NFT's tokenID, chain and address and returns the associated NFT metadata
+func (nft NFTDetailsImpl) GetNFTDetailsByID(chain constants.Chain, tokenID string, NFTAddress string) (
 	resp types.NFTByTokenIDResp, err error) {
 
 	if !constants.NFT_GetDetailsWithID.SupportsChain(chain) {
@@ -61,7 +66,7 @@ func (nft NFTDetailsImpl) GetDetailsByID(chain constants.Chain, tokenID string, 
 	return
 }
 
-func (nft NFTDetailsImpl) GetHolderByID(chain constants.Chain, tokenID string, NFTAddress string) (
+func (nft NFTDetailsImpl) GetNFTHolderByID(chain constants.Chain, tokenID string, NFTAddress string) (
 	resp types.NFTHolderResponse, err error) {
 
 	if !constants.NFT_GetHoldersByID.SupportsChain(chain) {

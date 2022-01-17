@@ -22,7 +22,7 @@ func New(sess session.Session) PriceStoreImpl {
 //GetPriceAtInstant accepts a chain, contract address and a timestamp.
 //It fetches the price of a token at a given point in time.
 //If the token is not found, expect an empty response with no error.
-func (p PriceStoreImpl) GetPriceAtInstant(chain constants.Chain, contractAddress string, timestamp int64) (resp types.TokenPrice, err error) {
+func (p PriceStoreImpl) GetTokenPriceAtInstant(chain constants.Chain, contractAddress string, timestamp int64) (resp types.TokenPrice, err error) {
 	if !constants.PS_GetTokensPrice.SupportsChain(chain) {
 		return types.TokenPrice{}, constants.UnsupportedChainError
 	}
@@ -38,7 +38,7 @@ func (p PriceStoreImpl) GetPriceAtInstant(chain constants.Chain, contractAddress
 
 //GetCurrentPrice accepts a chain and a contract address. It fetches the token's current price.
 //If the token is not found, expect an empty response with no error.
-func (p PriceStoreImpl) GetCurrentPrice(chain constants.Chain, contractAddress string) (resp types.TokenPrice, err error) {
+func (p PriceStoreImpl) GetTokenCurrentPrice(chain constants.Chain, contractAddress string) (resp types.TokenPrice, err error) {
 	if !constants.PS_GetTokensPrice.SupportsChain(chain) {
 		return types.TokenPrice{}, constants.UnsupportedChainError
 	}
@@ -51,7 +51,7 @@ func (p PriceStoreImpl) GetCurrentPrice(chain constants.Chain, contractAddress s
 }
 
 //GetGainers accepts only the chain and returns a list of top gainers
-func (p PriceStoreImpl) GetGainers(chain constants.Chain) (resp types.TokenDetailsResp, err error) {
+func (p PriceStoreImpl) GetTopGainers(chain constants.Chain) (resp types.TokenDetailsResp, err error) {
 	if !constants.PS_GetGainers.SupportsChain(chain) {
 		return types.TokenDetailsResp{}, constants.UnsupportedChainError
 	}
@@ -63,7 +63,7 @@ func (p PriceStoreImpl) GetGainers(chain constants.Chain) (resp types.TokenDetai
 }
 
 //GetLosers accepts only the chain and returns a list of top losers for that chain
-func (p PriceStoreImpl) GetLosers(chain constants.Chain) (resp types.TokenDetailsResp, err error) {
+func (p PriceStoreImpl) GetTopLosers(chain constants.Chain) (resp types.TokenDetailsResp, err error) {
 	if !constants.PS_GetLosers.SupportsChain(chain) {
 		return types.TokenDetailsResp{}, constants.UnsupportedChainError
 	}
@@ -91,7 +91,7 @@ func (p PriceStoreImpl) GetLPTokens(chain constants.Chain, lptoken string) (resp
 }
 
 //GetTokensPrice takes in a chain and a list of tokens. It then returns the price for all specified tokens in the list
-func (p PriceStoreImpl) GetTokensPrice(chain constants.Chain, tokenList []string) (resp types.TokenListWithPrice, err error) {
+func (p PriceStoreImpl) GetMultipleTokenPrice(chain constants.Chain, tokenList []string) (resp types.TokenListWithPrice, err error) {
 	if !constants.PS_GetTokensPrice.SupportsChain(chain) {
 		return types.TokenListWithPrice{}, constants.UnsupportedChainError
 	}
@@ -106,7 +106,7 @@ func (p PriceStoreImpl) GetTokensPrice(chain constants.Chain, tokenList []string
 
 //GetPriceWithSymbol accepts a Symbol and returns an array of token with their prices that match the symbol
 //If the token is not found, expect an empty response with no error.
-func (p PriceStoreImpl) GetPriceWithSymbol(symbol string) (resp types.PriceWithSymbolResp, err error) {
+func (p PriceStoreImpl) GetTokenPriceBySymbol(symbol string) (resp types.PriceWithSymbolResp, err error) {
 	path := strings.Replace(constants.PS_GetPriceWithSymbol.GetURI(), ":symbol", symbol, 1)
 	var urlVals = make(url.Values)
 	err = p.sess.Client.Get(&resp, path, urlVals)
