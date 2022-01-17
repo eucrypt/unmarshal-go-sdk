@@ -21,6 +21,7 @@ package main
 import (
   unmarshal "github.com/eucrypt/unmarshal-go-sdk/pkg
   conf "github.com/eucrypt/unmarshal-go-sdk/pkg/config"
+  "github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 )
 
 func main() {
@@ -41,6 +42,7 @@ package main
 import (
   unmarshal "github.com/eucrypt/unmarshal-go-sdk/pkg"
   conf "github.com/eucrypt/unmarshal-go-sdk/pkg/config"
+  "github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 )
 
 func main() {
@@ -49,7 +51,7 @@ func main() {
     Environment: constants.Prod,
   })
 
-  resp, err := sdk.GetPriceWithSymbol("marsh")
+  resp, err := sdk.GetTokenPriceBySymbol("marsh")
 }
 
 ```
@@ -71,7 +73,7 @@ func main() {
     Environment: constants.Prod,
   })
 
-  resp, err := sdk.GetCurrentPrice(constants.BSC, "0x2fa5daf6fe0708fbd63b1a7d1592577284f52256")
+  resp, err := sdk.GetTokenCurrentPrice(constants.BSC, "0x2fa5daf6fe0708fbd63b1a7d1592577284f52256")
 }
 
 ```
@@ -81,44 +83,44 @@ func main() {
 ### Price Store ([Docs](https://docs.unmarshal.io))
 
 - Get Price
-  - (`GetCurrentPrice`)
+  - (`GetTokenCurrentPrice`)
 - Get Price at Instant
-  - (`GetPriceAtInstant`)
+  - (`GetTokenPriceAtInstant`)
 - Get Price With Symbol
-  - (`GetPriceWithSymbol`)
+  - (`GetTokenPriceBySymbol`)
 - Get Gainers
-  - (`GetGainers`)
+  - (`GetTopGainers`)
 - Get Losers
-  - (`GetLosers`)
+  - (`GetTopLosers`)
 - Get LpTokens
   - (`GetLPTokens`)
 - Get Price of List of tokens
-  - (`GetTokensPrice`)
+  - (`GetMultipleTokenPrice`)
 
 ### Token Details ([Docs](https://docs.unmarshal.io/token-store))
 
 - Get Token With Contract
-  - `v1/tokenstore/token/address/:address` (`GetDetailsWithContract`)
+  - `v1/tokenstore/token/address/:address` (`GetTokenDetailsByContract`)
 - Get Token With Symbol
-  - `v1/tokenstore/token/symbol/:symbol` (`GetTokenWithSymbol`)
+  - `v1/tokenstore/token/symbol/:symbol` (`GetTokenDetailsBySymbol`)
 - Get Paginated List Of Tokens
   - `v1/tokenstore/token/all` (`GetTokenList`)
 
 ### Assets API ([Docs](https://docs.unmarshal.io/unmarshal-apis/token-balance-apis))
 
 - Get List of Assets
-  - `v1/:chain/address/:address/assets` (`GetAssets`)
+  - `v1/:chain/address/:address/assets` (`GetTokenAssets`)
 
 ### NFT APIs ([Docs](https://docs.unmarshal.io/nft-apis))
 
 - Get NFT assets for an address
-  - `v1/:chain/address/:address/nft-assets` (`GetAssetsByAddress`)
+  - `v1/:chain/address/:address/nft-assets` (`GetNFTAssetsByAddress`)
 - Get NFT Transactions by Address
-  - `v1/:chain/address/:address/nft-transactions` (`GetTransactionsByAddress`)
+  - `v1/:chain/address/:address/nft-transactions` (`GetNFTTransactionsByAddress`)
 - Get NFT Metadata
-  - `v1/:chain/address/:address/details?tokenId=` (`GetDetailsByID`)
+  - `v1/:chain/address/:address/details?tokenId=` (`GetNFTDetailsByID`)
 - Get NFT Holders using the NFT's Token ID
-  - `v1/:chain/address/:address/nftholders?tokenId=` (`GetHolderByID`)
+  - `v1/:chain/address/:address/nftholders?tokenId=` (`GetNFTHolderByID`)
 
 ### Transaction APIs ([Docs](https://docs.unmarshal.io/supported-networks))
 
@@ -128,5 +130,12 @@ func main() {
   - `v2/:chain/address/:address/transactions?contract=&page=&pageSize=` (`GetTokenTxnsV2`)
 - Get Transaction details by Transaction ID
   - `v1/:chain/transactions/:txID` (`GetTxnDetails`)
+
+### Protocol APIs ([Docs](https://docs.unmarshal.io/unmarshal-protocol-apis))
+
+- Get Protocol Positions for an address
+  - `v2/protocols/:protocol/address/:address/positions` (`GetPositions`)
+- Get Protocol Pairs
+  - `v2/protocols/:protocol/pairs` (`GetPairs`)
 
 
