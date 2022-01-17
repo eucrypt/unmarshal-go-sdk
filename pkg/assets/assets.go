@@ -6,5 +6,5 @@ import (
 )
 
 type Assets interface {
-	GetAssets(chain constants.Chain, address string) (response types.AssetDetailsV1Resp, err error)
+	GetTokenAssets(chain constants.Chain, address string) (response types.AssetDetailsV1Resp, err error)
 }

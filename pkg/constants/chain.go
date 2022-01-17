@@ -21,22 +21,6 @@ var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
 
 var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
 
-var allowedCallersByChain = map[APIName]map[Chain]bool{
-	PS_GetPriceWithAddress: priceStoreSupported,
-	PS_GetTokensPrice:      priceStoreSupported,
-	PS_GetLpTokenPrice:     priceStoreSupported,
-	PS_GetLosers:           priceStoreSupported,
-	PS_GetGainers:          priceStoreSupported,
-	ASSETS_GetAssets:       allChains,
-	NFT_GetAssets:          {ETH: true, BSC: true, MATIC: true, SOL: true},
-	NFT_GetTxns:            nftEVMSupport,
-	NFT_GetDetailsWithID:   nftEVMSupport,
-	NFT_GetHoldersByID:     nftEVMSupport,
-	TXN_GetTokenTxns:       {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, XDC: true},
-	TXN_GetTxnDetails:      {ETH: true, BSC: true, MATIC: true, SOL: true, XDC: true},
-	TXN_GetTokenTxnsV2:     {ETH: true, BSC: true, XDC: true},
-}
-
 //String returns the string specific version of the chain
 func (c Chain) String() string {
 	return string(c)

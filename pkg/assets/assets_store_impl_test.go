@@ -16,12 +16,12 @@ func TestV1Store_GetAssets(t *testing.T) {
 	validAddr := "demo.eth"
 	chain := constants.ETH
 	t.Run("Evaluate Get  Current Price", func(t *testing.T) {
-		resp, err := ps.GetAssets(chain, validAddr)
+		resp, err := ps.GetTokenAssets(chain, validAddr)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 
-		resp, _ = ps.GetAssets(chain, "invalidAddr")
+		resp, _ = ps.GetTokenAssets(chain, "invalidAddr")
 		ast.Empty(resp, "should have an empty response for an invalid call")
 	})
 }

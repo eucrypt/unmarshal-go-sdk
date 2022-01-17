@@ -1,7 +1,5 @@
 package types
 
-//TODO:Set up response structs
-
 type GetPairsResp struct {
 	Total         int `json:"total"`
 	ProtocolPairs []struct {

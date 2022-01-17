@@ -17,16 +17,16 @@ func TestNFTDetailsImpl_GetAssetsByAddress(t *testing.T) {
 		validAddr := "demo.eth"
 		chain := constants.ETH
 
-		resp, err := nftObj.GetAssetsByAddress(chain, validAddr)
+		resp, err := nftObj.GetNFTAssetsByAddress(chain, validAddr)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 
-		resp, _ = nftObj.GetAssetsByAddress(chain, "")
+		resp, _ = nftObj.GetNFTAssetsByAddress(chain, "")
 		ast.Empty(resp, "should have an empty response for an invalid call")
 
 		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
-		_, err = nftObj.GetAssetsByAddress(constants.HUOBI, "")
+		_, err = nftObj.GetNFTAssetsByAddress(constants.HUOBI, "")
 		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 
 	})
@@ -53,16 +53,16 @@ func TestNFTDetailsImpl_GetDetailsByID(t *testing.T) {
 		validTokenId := "61"
 		validNFTAddr := "0x3cf8695c5cb6caa78d9c7fc9fa34bc8271483a1a"
 
-		resp, err := nftObj.GetDetailsByID(validChain, validTokenId, validNFTAddr)
+		resp, err := nftObj.GetNFTDetailsByID(validChain, validTokenId, validNFTAddr)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 
-		resp, _ = nftObj.GetDetailsByID(validChain, "", "")
+		resp, _ = nftObj.GetNFTDetailsByID(validChain, "", "")
 		ast.Empty(resp, "should have an empty response for an invalid call")
 
 		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
-		_, err = nftObj.GetDetailsByID(constants.HUOBI, "", "")
+		_, err = nftObj.GetNFTDetailsByID(constants.HUOBI, "", "")
 		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 	})
 	t.Run("Evaluating Get NFT Details by ID 2", func(t *testing.T) {
@@ -70,7 +70,7 @@ func TestNFTDetailsImpl_GetDetailsByID(t *testing.T) {
 		validTokenId := "1300020038"
 		validNFTAddr := "0x4629122c04eacc2ca48bda4a92aadcaee5d15389"
 
-		resp, err := nftObj.GetDetailsByID(validChain, validTokenId, validNFTAddr)
+		resp, err := nftObj.GetNFTDetailsByID(validChain, validTokenId, validNFTAddr)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
@@ -87,16 +87,16 @@ func TestNFTDetailsImpl_GetHolderByID(t *testing.T) {
 		validTokenId := "61"
 		validNFTAddr := "0x3cf8695c5cb6caa78d9c7fc9fa34bc8271483a1a"
 
-		resp, err := nftObj.GetHolderByID(validChain, validTokenId, validNFTAddr)
+		resp, err := nftObj.GetNFTHolderByID(validChain, validTokenId, validNFTAddr)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 
-		resp, _ = nftObj.GetHolderByID(validChain, "", "")
+		resp, _ = nftObj.GetNFTHolderByID(validChain, "", "")
 		ast.Empty(resp, "should have an empty response for an invalid call")
 
 		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
-		_, err = nftObj.GetHolderByID(constants.HUOBI, "", "")
+		_, err = nftObj.GetNFTHolderByID(constants.HUOBI, "", "")
 		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 	})
 	t.Run("Evaluating Get NFT Holders by Token ID 2", func(t *testing.T) {
@@ -104,7 +104,7 @@ func TestNFTDetailsImpl_GetHolderByID(t *testing.T) {
 		validTokenId := "1300020038"
 		validNFTAddr := "0x4629122c04eacc2ca48bda4a92aadcaee5d15389"
 
-		resp, err := nftObj.GetHolderByID(validChain, validTokenId, validNFTAddr)
+		resp, err := nftObj.GetNFTHolderByID(validChain, validTokenId, validNFTAddr)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
@@ -122,13 +122,13 @@ func TestNFTDetailsImpl_GetTransactionsByAddress(t *testing.T) {
 		pageNumber := 1
 		pageSize := 5
 
-		resp, err := nftObj.GetTransactionsByAddress(validChain, validAddr, pageNumber, pageSize)
+		resp, err := nftObj.GetNFTTransactionsByAddress(validChain, validAddr, pageNumber, pageSize)
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 		ast.Len(resp, 5, "Exactly 5 objects should be a part of the response")
 
 		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
-		_, err = nftObj.GetTransactionsByAddress(constants.HUOBI, "", 0, 0)
+		_, err = nftObj.GetNFTTransactionsByAddress(constants.HUOBI, "", 0, 0)
 		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 	})
 	t.Run("Evaluating Get NFT Transactions By Address 2", func(t *testing.T) {
@@ -137,7 +137,7 @@ func TestNFTDetailsImpl_GetTransactionsByAddress(t *testing.T) {
 		pageNumber := 1
 		pageSize := 10
 
-		resp, err := nftObj.GetTransactionsByAddress(validChain, validAddr, pageNumber, pageSize)
+		resp, err := nftObj.GetNFTTransactionsByAddress(validChain, validAddr, pageNumber, pageSize)
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 		ast.Len(resp, 10, "Exactly 10 objects should be a part of the response")

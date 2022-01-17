@@ -12,8 +12,8 @@ const (
 	TS_GetDetailsWithContract APIName = "v1/tokenstore/token/address/:address"
 	TS_GetTokenList           APIName = "v1/tokenstore/token/all"
 	TS_GetTokenWithSymbol     APIName = "v1/tokenstore/token/symbol/:symbol"
-	ASSETS_GetAssets          APIName = "v1/:chain/address/:address/assets"
-	NFT_GetAssets             APIName = "v1/:chain/address/:address/nft-assets"
+	ASSETS_GetTokenAssets     APIName = "v1/:chain/address/:address/assets"
+	NFT_GetNFTAssets          APIName = "v1/:chain/address/:address/nft-assets"
 	NFT_GetTxns               APIName = "v1/:chain/address/:address/nft-transactions"
 	NFT_GetDetailsWithID      APIName = "v1/:chain/address/:address/details"
 	NFT_GetHoldersByID        APIName = "v1/:chain/address/:address/nftholders"
@@ -23,6 +23,22 @@ const (
 	PROTO_GetPositions        APIName = "v2/protocols/:protocol/address/:address/positions"
 	PROTO_GetPairs            APIName = "v2/protocols/:protocol/pairs"
 )
+
+var allowedCallersByChain = map[APIName]map[Chain]bool{
+	PS_GetPriceWithAddress: priceStoreSupported,
+	PS_GetTokensPrice:      priceStoreSupported,
+	PS_GetLpTokenPrice:     priceStoreSupported,
+	PS_GetLosers:           priceStoreSupported,
+	PS_GetGainers:          priceStoreSupported,
+	ASSETS_GetTokenAssets:  allChains,
+	NFT_GetNFTAssets:       {ETH: true, BSC: true, MATIC: true, SOL: true},
+	NFT_GetTxns:            nftEVMSupport,
+	NFT_GetDetailsWithID:   nftEVMSupport,
+	NFT_GetHoldersByID:     nftEVMSupport,
+	TXN_GetTokenTxns:       {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, XDC: true},
+	TXN_GetTxnDetails:      {ETH: true, BSC: true, MATIC: true, SOL: true, XDC: true},
+	TXN_GetTokenTxnsV2:     {ETH: true, BSC: true, XDC: true},
+}
 
 //SupportsChain Allows a caller to know if a chain specific API supports a passed valid chain
 func (api APIName) SupportsChain(chain Chain) bool {

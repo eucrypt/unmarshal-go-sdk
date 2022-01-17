@@ -17,9 +17,9 @@ func New(sess session.Session) TokenStoreV1 {
 	return TokenStoreV1{sess}
 }
 
-//GetDetailsWithContract returns token data when provided with a valid contract.
+//GetTokenDetailsByContract returns token data when provided with a valid contract.
 //The search happens across every supported chain
-func (t TokenStoreV1) GetDetailsWithContract(contractAddress string) (resp types.TokenDetails, err error) {
+func (t TokenStoreV1) GetTokenDetailsByContract(contractAddress string) (resp types.TokenDetails, err error) {
 	path := strings.Replace(constants.TS_GetDetailsWithContract.GetURI(), ":address", contractAddress, 1)
 	err = t.sess.Client.Get(&resp, path, nil)
 	return
@@ -38,9 +38,9 @@ func (t TokenStoreV1) GetTokenList(pageNumber int, pageSize int) (resp types.Get
 	return
 }
 
-//GetTokenWithSymbol Accepts a symbol and returns token data.
+//GetTokenDetailsBySymbol Accepts a symbol and returns token data.
 //The search is cross-chain and the result includes the blockchain of the specific token
-func (t TokenStoreV1) GetTokenWithSymbol(symbol string) (resp []types.TokenDetails, err error) {
+func (t TokenStoreV1) GetTokenDetailsBySymbol(symbol string) (resp []types.TokenDetails, err error) {
 	path := strings.Replace(constants.TS_GetTokenWithSymbol.GetURI(), ":symbol", symbol, 1)
 	err = t.sess.Client.Get(&resp, path, nil)
 	return
