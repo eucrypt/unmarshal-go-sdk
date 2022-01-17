@@ -53,10 +53,10 @@ func (nft NFTDetailsImpl) GetNFTTransactionsByAddress(chain constants.Chain, add
 func (nft NFTDetailsImpl) GetNFTDetailsByID(chain constants.Chain, tokenID string, NFTAddress string) (
 	resp types.NFTByTokenIDResp, err error) {
 
-	if !constants.NFT_GetDetailsWithID.SupportsChain(chain) {
+	if !constants.NFT_GetDetailsByID.SupportsChain(chain) {
 		return types.NFTByTokenIDResp{}, constants.UnsupportedChainError
 	}
-	path := strings.Replace(constants.NFT_GetDetailsWithID.GetURI(), ":chain", chain.String(), 1)
+	path := strings.Replace(constants.NFT_GetDetailsByID.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", NFTAddress, 1)
 	vals := map[string]interface{}{
 		"tokenId": tokenID,

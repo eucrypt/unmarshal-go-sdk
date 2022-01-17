@@ -107,7 +107,7 @@ func (p PriceStoreImpl) GetMultipleTokenPrice(chain constants.Chain, tokenList [
 //GetPriceWithSymbol accepts a Symbol and returns an array of token with their prices that match the symbol
 //If the token is not found, expect an empty response with no error.
 func (p PriceStoreImpl) GetTokenPriceBySymbol(symbol string) (resp types.PriceWithSymbolResp, err error) {
-	path := strings.Replace(constants.PS_GetPriceWithSymbol.GetURI(), ":symbol", symbol, 1)
+	path := strings.Replace(constants.PS_GetPriceBySymbol.GetURI(), ":symbol", symbol, 1)
 	var urlVals = make(url.Values)
 	err = p.sess.Client.Get(&resp, path, urlVals)
 
