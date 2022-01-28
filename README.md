@@ -12,7 +12,7 @@ The first step involved is to `go get` this project.
 go get github.com/eucrypt/unmarshal-go-sdk
 ```
 
-Create an SDK type and pass it your auth key. (To generate an Auth key you will need to create a user account at (
+Create an SDK type and pass it your auth key. (To generate an Auth key you will need to create a user account at [Unmarshal Console](
 console.unmarshal.io))
 
 ```go
