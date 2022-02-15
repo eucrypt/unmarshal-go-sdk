@@ -19,7 +19,7 @@ console.unmarshal.io))
 package main
 
 import (
-  unmarshal "github.com/eucrypt/unmarshal-go-sdk/pkg
+  unmarshal "github.com/eucrypt/unmarshal-go-sdk/pkg"
   conf "github.com/eucrypt/unmarshal-go-sdk/pkg/config"
   "github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 )
