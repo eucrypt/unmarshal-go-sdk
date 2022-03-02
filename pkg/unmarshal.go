@@ -5,6 +5,7 @@ import (
 	conf "github.com/eucrypt/unmarshal-go-sdk/pkg/config"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/nft_details"
+	"github.com/eucrypt/unmarshal-go-sdk/pkg/notifications"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/protocol_details"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/token_details"
@@ -19,6 +20,7 @@ type Unmarshal struct {
 	nft_details.NftDetails
 	transaction_details.TransactionDetails
 	protocol_details.ProtocolDetails
+	notifications.Notification
 }
 
 func NewWithConfig(config conf.Config) Unmarshal {
