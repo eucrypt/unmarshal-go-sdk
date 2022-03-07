@@ -16,3 +16,14 @@ type AssetDetailsV1 struct {
 }
 
 type AssetDetailsV1Resp []AssetDetailsV1
+
+type UserContractData struct {
+	QuoteRate              float64 `json:"quote_rate"`
+	TotalFeesPaid          float64 `json:"total_fees_paid"`
+	TotalFeesPaidUsd       float64 `json:"total_fees_paid_usd"`
+	AverageTokenPrice      float64 `json:"average_token_price"`
+	OverallProfitLoss      float64 `json:"overall_profit_loss"`
+	CurrentHoldingQuantity float64 `json:"current_holding_quantity"`
+	PercentageChange24H    float64 `json:"percentage_change_24H"`
+	PriceChange24H         float64 `json:"price_change_24H"`
+}
