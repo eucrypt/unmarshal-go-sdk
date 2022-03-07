@@ -80,7 +80,7 @@ func main() {
 
 ## The SDK has support for the following unmarshal API:
 
-### Price Store ([Docs](https://docs.unmarshal.io))
+### Price Store ([Docs](https://docs.unmarshal.io/openapi/core/tag/Price-Store/))
 
 - Get Price
   - `v1/pricestore/chain/:chain/:address` (`GetTokenCurrentPrice`)
@@ -97,7 +97,7 @@ func main() {
 - Get Price of List of tokens
   - `v1/tokenstore/token/all` (`GetMultipleTokenPrice`)
 
-### Token Details ([Docs](https://docs.unmarshal.io/token-store))
+### Token Details ([Docs](https://docs.unmarshal.io/openapi/core/tag/Token-Store/))
 
 - Get Token With Contract
   - `v1/tokenstore/token/address/:address` (`GetTokenDetailsByContract`)
@@ -106,12 +106,12 @@ func main() {
 - Get Paginated List Of Tokens
   - `v1/tokenstore/token/all` (`GetTokenList`)
 
-### Assets API ([Docs](https://docs.unmarshal.io/unmarshal-apis/token-balance-apis))
+### Assets API ([Docs](https://docs.unmarshal.io/openapi/core/tag/Wallet-APIs/))
 
 - Get List of Assets
   - `v1/:chain/address/:address/assets` (`GetTokenAssets`)
 
-### NFT APIs ([Docs](https://docs.unmarshal.io/nft-apis))
+### NFT APIs ([Docs](https://docs.unmarshal.io/openapi/core/tag/NFTs/))
 
 - Get NFT assets for an address
   - `v1/:chain/address/:address/nft-assets` (`GetNFTAssetsByAddress`)
@@ -122,7 +122,7 @@ func main() {
 - Get NFT Holders using the NFT's Token ID
   - `v1/:chain/address/:address/nftholders?tokenId=` (`GetNFTHolderByID`)
 
-### Transaction APIs ([Docs](https://docs.unmarshal.io/supported-networks))
+### Transaction APIs ([Docs](https://docs.unmarshal.io/openapi/core/tag/Wallet-APIs/#tag/Wallet-APIs/operation/transaction-history-v-1))
 
 - Get Transaction data for an address
   - `v1/:chain/address/:address/transactions?contract=&page=&pageSize=` (`GetTokenTxns`)
@@ -131,7 +131,7 @@ func main() {
 - Get Transaction details by Transaction ID
   - `v1/:chain/transactions/:txID` (`GetTxnDetails`)
 
-### Protocol APIs ([Docs](https://docs.unmarshal.io/unmarshal-protocol-apis))
+### Protocol APIs ([Docs](https://docs.unmarshal.io/openapi/core/tag/Price-Store/#tag/Price-Store/operation/price-for-lp-tokens))
 
 - Get Protocol Positions for an address
   - `v2/protocols/:protocol/address/:address/positions` (`GetPositions`)
