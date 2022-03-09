@@ -19,7 +19,7 @@ func New(sess session.Session) PriceStoreImpl {
 	return PriceStoreImpl{sess}
 }
 
-//GetPriceAtInstant accepts a chain, contract address and a timestamp.
+// GetTokenPriceAtInstant GetPriceAtInstant accepts a chain, contract address and a timestamp.
 //It fetches the price of a token at a given point in time.
 //If the token is not found, expect an empty response with no error.
 func (p PriceStoreImpl) GetTokenPriceAtInstant(chain constants.Chain, contractAddress string, timestamp int64) (resp types.TokenPrice, err error) {
@@ -36,7 +36,7 @@ func (p PriceStoreImpl) GetTokenPriceAtInstant(chain constants.Chain, contractAd
 	return
 }
 
-//GetCurrentPrice accepts a chain and a contract address. It fetches the token's current price.
+// GetTokenCurrentPrice GetCurrentPrice accepts a chain and a contract address. It fetches the token's current price.
 //If the token is not found, expect an empty response with no error.
 func (p PriceStoreImpl) GetTokenCurrentPrice(chain constants.Chain, contractAddress string) (resp types.TokenPrice, err error) {
 	if !constants.PS_GetTokensPrice.SupportsChain(chain) {

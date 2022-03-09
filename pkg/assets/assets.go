@@ -7,4 +7,5 @@ import (
 
 type Assets interface {
 	GetTokenAssets(chain constants.Chain, address string) (response types.AssetDetailsV1Resp, err error)
+	GetProfitAndLoss(chain constants.Chain, address, contract string) (response types.UserContractData, err error)
 }
