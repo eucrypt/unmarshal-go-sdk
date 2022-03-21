@@ -39,7 +39,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 	NFT_GetHoldersByID:       nftEVMSupport,
 	TXN_GetTokenTxns:         {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, AVALANCHE: true, XDC: true},
 	TXN_GetTxnDetails:        {ETH: true, BSC: true, MATIC: true, SOL: true, AVALANCHE: true, XDC: true},
-	TXN_GetTokenTxnsV2:       {ETH: true, BSC: true, XDC: true},
+	TXN_GetTokenTxnsV2:       {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, XDC: true},
 }
 
 //SupportsChain Allows a caller to know if a chain specific API supports a passed valid chain
