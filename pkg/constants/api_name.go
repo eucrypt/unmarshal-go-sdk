@@ -33,12 +33,12 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 	PS_GetGainers:            priceStoreSupported,
 	ASSETS_GetTokenAssets:    allChains,
 	ASSETS_GetProfitsAndLoss: priceStoreSupported,
-	NFT_GetNFTAssets:         {ETH: true, BSC: true, MATIC: true, SOL: true},
+	NFT_GetNFTAssets:         {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, SOL: true},
 	NFT_GetTxns:              nftEVMSupport,
 	NFT_GetDetailsByID:       nftEVMSupport,
 	NFT_GetHoldersByID:       nftEVMSupport,
-	TXN_GetTokenTxns:         {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, XDC: true},
-	TXN_GetTxnDetails:        {ETH: true, BSC: true, MATIC: true, SOL: true, XDC: true},
+	TXN_GetTokenTxns:         {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, AVALANCHE: true, XDC: true},
+	TXN_GetTxnDetails:        {ETH: true, BSC: true, MATIC: true, SOL: true, AVALANCHE: true, XDC: true},
 	TXN_GetTokenTxnsV2:       {ETH: true, BSC: true, XDC: true},
 }
 
