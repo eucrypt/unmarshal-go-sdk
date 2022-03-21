@@ -30,6 +30,16 @@ func TestNFTDetailsImpl_GetAssetsByAddress(t *testing.T) {
 		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 
 	})
+	t.Run("Evaluating Get Assets by Address on Avalanche", func(t *testing.T) {
+		validAddr := "0x59DD353A69e2370ca98C1ff32587131b779a587a"
+		chain := constants.AVALANCHE
+
+		resp, err := nftObj.GetNFTAssetsByAddress(chain, validAddr)
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+
+	})
 }
 
 func getTestNFTObj() NFTDetailsImpl {
@@ -134,6 +144,19 @@ func TestNFTDetailsImpl_GetTransactionsByAddress(t *testing.T) {
 	t.Run("Evaluating Get NFT Transactions By Address 2", func(t *testing.T) {
 		validAddr := "demo.eth"
 		validChain := constants.ETH
+		pageNumber := 1
+		pageSize := 10
+
+		resp, err := nftObj.GetNFTTransactionsByAddress(validChain, validAddr, pageNumber, pageSize)
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		ast.Len(resp, 10, "Exactly 10 objects should be a part of the response")
+
+	})
+
+	t.Run("Evaluating Get NFT Transactions By Address 3", func(t *testing.T) {
+		validAddr := "0x59DD353A69e2370ca98C1ff32587131b779a587a"
+		validChain := constants.AVALANCHE
 		pageNumber := 1
 		pageSize := 10
 

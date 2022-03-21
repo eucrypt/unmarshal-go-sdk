@@ -24,6 +24,14 @@ func TestV1Store_GetAssets(t *testing.T) {
 		resp, _ = testAssetsStore.GetTokenAssets(chain, "invalidAddr")
 		ast.Empty(resp, "should have an empty response for an invalid call")
 	})
+	t.Run("Evaluate TokenAssets on Avalanche", func(t *testing.T) {
+		resp, err := testAssetsStore.GetTokenAssets(constants.AVALANCHE, "0x43e83480982dE3de894378bfaC4388c2bf3b2aCA")
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		resp, _ = testAssetsStore.GetTokenAssets(chain, "invalidAddr")
+		ast.Empty(resp, "should have an empty response for an invalid call")
+	})
 }
 
 func TestV1Store_GetProfitAndLoss(t *testing.T) {

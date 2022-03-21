@@ -59,6 +59,18 @@ func TestTxnDetailsImpl_GetTokenTxns(t *testing.T) {
 		ast.Empty(resp, "The response should be empty")
 
 	})
+	t.Run("Evaluating Get Token Txns on avalanche", func(t *testing.T) {
+		avalancheAddr := "0x59DD353A69e2370ca98C1ff32587131b779a587a"
+		avalancheChain := constants.AVALANCHE
+		resp, err := txnDetails.GetTokenTxns(avalancheChain, avalancheAddr, &TokenTxnsOpts{
+			PageSize: 10,
+			Page:     2,
+		})
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		ast.Len(resp.Transactions, 10, "Exactly 10 objects should be a part of the response")
+	})
 
 }
 
@@ -124,6 +136,14 @@ func TestTxnDetailsImpl_GetTxnDetails(t *testing.T) {
 		validChain := constants.ETH
 
 		resp, err := txnDetails.GetTxnDetails(validChain, validID)
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+	})
+	t.Run("Evaluating Get Transaction Details with valid data", func(t *testing.T) {
+		validChain := constants.AVALANCHE
+		validTxnId := "0xf1b56f250233d0cc1390e33e34223f6eadf4c935fe4c9ad4ded6aad416feec7f"
+		resp, err := txnDetails.GetTxnDetails(validChain, validTxnId)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
