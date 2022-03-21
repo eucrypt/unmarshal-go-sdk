@@ -28,6 +28,7 @@ var allChains = map[Chain]bool{
 }
 
 var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
+var priceStoreSupportedWithAvax = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true}
 
 var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true}
 

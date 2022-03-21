@@ -26,9 +26,9 @@ const (
 )
 
 var allowedCallersByChain = map[APIName]map[Chain]bool{
-	PS_GetPriceWithAddress:   priceStoreSupported,
-	PS_GetTokensPrice:        priceStoreSupported,
-	PS_GetLpTokenPrice:       priceStoreSupported,
+	PS_GetPriceWithAddress:   priceStoreSupportedWithAvax,
+	PS_GetTokensPrice:        priceStoreSupportedWithAvax,
+	PS_GetLpTokenPrice:       priceStoreSupportedWithAvax,
 	PS_GetLosers:             priceStoreSupported,
 	PS_GetGainers:            priceStoreSupported,
 	ASSETS_GetTokenAssets:    allChains,

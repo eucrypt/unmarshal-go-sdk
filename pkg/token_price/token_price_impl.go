@@ -50,7 +50,7 @@ func (p PriceStoreImpl) GetTokenCurrentPrice(chain constants.Chain, contractAddr
 	return
 }
 
-//GetGainers accepts only the chain and returns a list of top gainers
+//GetTopGainers accepts only the chain and returns a list of top gainers
 func (p PriceStoreImpl) GetTopGainers(chain constants.Chain) (resp types.TokenDetailsResp, err error) {
 	if !constants.PS_GetGainers.SupportsChain(chain) {
 		return types.TokenDetailsResp{}, constants.UnsupportedChainError
@@ -62,7 +62,7 @@ func (p PriceStoreImpl) GetTopGainers(chain constants.Chain) (resp types.TokenDe
 	return
 }
 
-//GetLosers accepts only the chain and returns a list of top losers for that chain
+//GetTopLosers accepts only the chain and returns a list of top losers for that chain
 func (p PriceStoreImpl) GetTopLosers(chain constants.Chain) (resp types.TokenDetailsResp, err error) {
 	if !constants.PS_GetLosers.SupportsChain(chain) {
 		return types.TokenDetailsResp{}, constants.UnsupportedChainError
@@ -90,7 +90,7 @@ func (p PriceStoreImpl) GetLPTokens(chain constants.Chain, lptoken string) (resp
 	return
 }
 
-//GetTokensPrice takes in a chain and a list of tokens. It then returns the price for all specified tokens in the list
+//GetMultipleTokenPrice takes in a chain and a list of tokens. It then returns the price for all specified tokens in the list
 func (p PriceStoreImpl) GetMultipleTokenPrice(chain constants.Chain, tokenList []string) (resp types.TokenListWithPrice, err error) {
 	if !constants.PS_GetTokensPrice.SupportsChain(chain) {
 		return types.TokenListWithPrice{}, constants.UnsupportedChainError
@@ -104,7 +104,7 @@ func (p PriceStoreImpl) GetMultipleTokenPrice(chain constants.Chain, tokenList [
 	return
 }
 
-//GetPriceWithSymbol accepts a Symbol and returns an array of token with their prices that match the symbol
+//GetTokenPriceBySymbol accepts a Symbol and returns an array of token with their prices that match the symbol
 //If the token is not found, expect an empty response with no error.
 func (p PriceStoreImpl) GetTokenPriceBySymbol(symbol string) (resp types.PriceWithSymbolResp, err error) {
 	path := strings.Replace(constants.PS_GetPriceBySymbol.GetURI(), ":symbol", symbol, 1)
