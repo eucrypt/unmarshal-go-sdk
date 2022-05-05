@@ -41,3 +41,21 @@ type PriceFromSymbol struct {
 }
 
 type PriceWithSymbolResp []PriceFromSymbol
+
+type GetPriceOptions struct {
+	Timestamp            uint64
+	TwentyFourHourChange bool
+	AlternateChain       bool
+}
+
+type GetPriceWithSymbolOptions struct {
+	Timestamp uint64
+}
+
+type GetTopGainersOptions struct {
+	MinimumPrice uint64
+}
+
+type GetTopLosersOptions struct {
+	MinimumPrice uint64
+}
