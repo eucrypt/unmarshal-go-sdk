@@ -1,7 +1,6 @@
 package token_price
 
 import (
-	"fmt"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
@@ -19,18 +18,14 @@ func New(sess session.Session) PriceStoreImpl {
 	return PriceStoreImpl{sess}
 }
 
-// GetTokenPriceAtInstant GetPriceAtInstant accepts a chain, contract address and a timestamp.
-//It fetches the price of a token at a given point in time.
-//If the token is not found, expect an empty response with no error.
+// GetTokenPriceAtInstant GetPriceAtInstant accepts a chain, contract address and additional options.
 func (p PriceStoreImpl) GetTokenPrice(chain constants.Chain, contractAddress string, options *types.GetPriceOptions) (resp types.TokenPrice, err error) {
-	fmt.Println("Getting token price")
 	if !constants.PS_GetTokensPrice.SupportsChain(chain) {
 		return types.TokenPrice{}, constants.UnsupportedChainError
 	}
 	path := strings.Replace(constants.PS_GetPriceWithAddress.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", contractAddress, 1)
 	var urlVals = p.getTokenPriceParams(options)
-	fmt.Println("Got query params")
 	err = p.sess.Client.Get(&resp, path, urlVals)
 	return
 }
