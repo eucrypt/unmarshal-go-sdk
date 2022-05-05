@@ -1,9 +1,10 @@
 package types
 
 type TokenPrice struct {
-	TokenId   string `json:"tokenId"`
-	Timestamp string `json:"timestamp"`
-	Price     string `json:"price"`
+	TokenId     string `json:"tokenId"`
+	Timestamp   string `json:"timestamp"`
+	Price       string `json:"price"`
+	PriceChange string `json:"price_change,omitempty"`
 }
 type TokenDetailsWithPrice struct {
 	Name          string `json:"name"`
