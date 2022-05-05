@@ -1,9 +1,10 @@
 package types
 
 type TokenPrice struct {
-	TokenId   string `json:"tokenId"`
-	Timestamp string `json:"timestamp"`
-	Price     string `json:"price"`
+	TokenId     string `json:"tokenId"`
+	Timestamp   string `json:"timestamp"`
+	Price       string `json:"price"`
+	PriceChange string `json:"price_change,omitempty"`
 }
 type TokenDetailsWithPrice struct {
 	Name          string `json:"name"`
@@ -41,3 +42,21 @@ type PriceFromSymbol struct {
 }
 
 type PriceWithSymbolResp []PriceFromSymbol
+
+type GetPriceOptions struct {
+	Timestamp            uint64
+	TwentyFourHourChange bool
+	AlternateChain       bool
+}
+
+type GetPriceWithSymbolOptions struct {
+	Timestamp uint64
+}
+
+type GetTopGainersOptions struct {
+	MinimumPrice uint64
+}
+
+type GetTopLosersOptions struct {
+	MinimumPrice uint64
+}

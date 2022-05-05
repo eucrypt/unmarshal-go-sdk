@@ -2,6 +2,7 @@ package constants
 
 type APIName string
 
+//goland:noinspection GoSnakeCaseUsage
 const (
 	PS_GetPriceWithAddress   APIName = "v1/pricestore/chain/:chain/:address"
 	PS_GetTokensPrice        APIName = "v1/pricestore/chain/:chain/tokens"

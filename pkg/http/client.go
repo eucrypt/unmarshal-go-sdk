@@ -167,17 +167,18 @@ func GetBody(body interface{}) (buf io.ReadWriter, err error) {
 }
 
 //QueryParamHelper accepts a map of string -> interface and returns the supported url.Values for the map.
-//It will assume any data that is not a []string is instead a string value.
-//This is because, url.Values is compatible only with Strings or string arrays.
 func QueryParamHelper(queryParams map[string]interface{}) (urlVals url.Values) {
 	if queryParams != nil {
 		urlVals = make(url.Values)
 		for key, val := range queryParams {
 			switch val.(type) {
 			default:
-				urlVals.Add(key, val.(string))
+				urlVals.Add(key, fmt.Sprint(val))
 			case []string:
 				urlVals[key] = val.([]string)
+
+			case string:
+				urlVals.Add(key, val.(string))
 			}
 		}
 	}

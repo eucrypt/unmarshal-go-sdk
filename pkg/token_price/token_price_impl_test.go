@@ -1,12 +1,15 @@
 package token_price
 
 import (
+	"fmt"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
+	"github.com/eucrypt/unmarshal-go-sdk/pkg/token_price/types"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -16,34 +19,39 @@ func TestPriceStoreV1_GetPrice(t1 *testing.T) {
 	ast := assert.New(t1)
 	validAddr := "0x41ab1b6fcbb2fa9dced81acbdec13ea6315f2bf2"
 	chain := constants.ETH
-	var time int64 = 1600173203
+	var time uint64 = 1600173203
 
 	t1.Run("Evaluate Get Price at instant", func(t *testing.T) {
-		resp, err := ps.GetTokenPriceAtInstant(chain, validAddr, time)
+		resp, err := ps.GetTokenPrice(chain, validAddr, &types.GetPriceOptions{Timestamp: time})
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 
-		resp, _ = ps.GetTokenPriceAtInstant(chain, "invalidAddr", time)
+		resp, _ = ps.GetTokenPrice(chain, "invalidAddr", nil)
 		ast.Empty(resp, "should have an empty response for an invalid call")
 
 		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
-		_, err = ps.GetTokenPriceAtInstant(constants.HUOBI, "", 0)
+		_, err = ps.GetTokenPrice(constants.HUOBI, "", nil)
 		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
 	})
 
-	t1.Run("Evaluate Get  Current Price", func(t *testing.T) {
-		resp, err := ps.GetTokenCurrentPrice(chain, validAddr)
+	t1.Run("Evaluate Get Current Price", func(t *testing.T) {
+		resp, err := ps.GetTokenPrice(chain, validAddr, nil)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
+		fmt.Printf("response: %#v", resp)
+	})
+	t1.Run("Evaluate Get Price with options", func(t *testing.T) {
+		resp, err := ps.GetTokenPrice(chain, validAddr, &types.GetPriceOptions{
+			Timestamp:            time,
+			TwentyFourHourChange: true,
+			AlternateChain:       true,
+		})
 
-		resp, _ = ps.GetTokenCurrentPrice(chain, "invalidAddr")
-		ast.Empty(resp, "should have an empty response for an invalid call")
-
-		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
-		_, err = ps.GetTokenCurrentPrice(constants.HUOBI, "")
-		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		ast.NotEmpty(resp.PriceChange, "The response should have price change data")
 	})
 
 }
@@ -101,12 +109,20 @@ func TestPriceStoreV1_GetPriceWithSymbol(t *testing.T) {
 	ast := assert.New(t)
 	symbol := "marsh"
 	t.Run("Evaluate GetTokenPriceBySymbol", func(t *testing.T) {
-		resp, err := ps.GetTokenPriceBySymbol(symbol)
+		resp, err := ps.GetTokenPriceBySymbol(symbol, nil)
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		resp, _ = ps.GetTokenPriceBySymbol("", nil)
+		ast.Empty(resp, "should have an empty response for an invalid call")
+	})
+	t.Run("Evaluate GetTokenPriceBySymbol with Options", func(t *testing.T) {
+		options := types.GetPriceWithSymbolOptions{Timestamp: 1644045522}
+		resp, err := ps.GetTokenPriceBySymbol(symbol, &options)
 
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 
-		resp, _ = ps.GetTokenPriceBySymbol("")
+		resp, _ = ps.GetTokenPriceBySymbol("", nil)
 		ast.Empty(resp, "should have an empty response for an invalid call")
 	})
 }
@@ -115,26 +131,88 @@ func TestPriceStoreV1_GetLosers(t *testing.T) {
 	ps := getTestPriceStore()
 	ast := assert.New(t)
 	chain := constants.ETH
-	resp, err := ps.GetTopLosers(chain)
+	t.Run("GetLosers with no options", func(t *testing.T) {
+		resp, err := ps.GetTopLosers(chain, nil)
 
-	ast.NoError(err, "There should be no error for a valid call")
-	ast.NotEmpty(resp, "The response should not be empty")
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
 
-	//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
-	_, err = ps.GetTopLosers(constants.HUOBI)
-	ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
+		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
+		_, err = ps.GetTopLosers(constants.HUOBI, nil)
+		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
+	})
+
+	t.Run("GetLosers with options", func(t *testing.T) {
+		expectedMinimumPrice := 10.0
+		options := types.GetTopLosersOptions{MinimumPrice: uint64(expectedMinimumPrice)}
+
+		resp, err := ps.GetTopLosers(chain, &options)
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		for _, tokenDetails := range resp {
+			currPrice, err := strconv.ParseFloat(tokenDetails.CurrentPrice, 0)
+			ast.NoError(err, "There should be no error while converting the price")
+			ast.GreaterOrEqual(currPrice, expectedMinimumPrice,
+				"The token's price should be greater than or equal to the expected minimum price")
+		}
+
+		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
+		_, err = ps.GetTopLosers(constants.HUOBI, &options)
+		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
+	})
+
 }
 
 func TestPriceStoreV1_GetGainers(t *testing.T) {
 	ps := getTestPriceStore()
 	ast := assert.New(t)
 	chain := constants.ETH
-	resp, err := ps.GetTopGainers(chain)
 
-	ast.NoError(err, "There should be no error for a valid call")
-	ast.NotEmpty(resp, "The response should not be empty")
+	t.Run("GetGainers with no options", func(t *testing.T) {
+		resp, err := ps.GetTopGainers(chain, nil)
 
-	//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
-	_, err = ps.GetTopGainers(constants.HUOBI)
-	ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+
+		//@dev The chain below is currently unsupported. Test will be deprecated if the chain is ever supported
+		_, err = ps.GetTopGainers(constants.HUOBI, nil)
+		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
+	})
+
+	t.Run("GetGainers with options", func(t *testing.T) {
+		expectedMinimumPrice := 10.0
+		options := types.GetTopGainersOptions{MinimumPrice: uint64(expectedMinimumPrice)}
+
+		resp, err := ps.GetTopGainers(chain, &options)
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		for _, tokenDetails := range resp {
+			currPrice, err := strconv.ParseFloat(tokenDetails.CurrentPrice, 0)
+			ast.NoError(err, "There should be no error while converting the price")
+			ast.GreaterOrEqual(currPrice, expectedMinimumPrice,
+				"The token's price should be greater than or equal to the expected minimum price")
+		}
+
+		_, err = ps.GetTopGainers(constants.HUOBI, &options)
+		ast.Equal(constants.UnsupportedChainError, err, "Call should result in an unsupported chain error")
+
+	})
+	t.Run("GetGainers with options", func(t *testing.T) {
+		expectedMinimumPrice := 15.0
+		options := types.GetTopGainersOptions{MinimumPrice: uint64(expectedMinimumPrice)}
+
+		resp, err := ps.GetTopGainers(chain, &options)
+
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		for _, tokenDetails := range resp {
+			currPrice, err := strconv.ParseFloat(tokenDetails.CurrentPrice, 0)
+			ast.NoError(err, "There should be no error while converting the price")
+			ast.GreaterOrEqual(currPrice, expectedMinimumPrice,
+				"The token's price should be greater than or equal to the expected minimum price")
+		}
+
+	})
 }

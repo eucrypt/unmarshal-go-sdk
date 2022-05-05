@@ -6,11 +6,10 @@ import (
 )
 
 type PriceStore interface {
-	GetTokenPriceAtInstant(chain constants.Chain, contractAddress string, timestamp int64) (types.TokenPrice, error)
-	GetTokenCurrentPrice(chain constants.Chain, contractAddress string) (resp types.TokenPrice, err error)
-	GetTopGainers(chain constants.Chain) (resp types.TokenDetailsResp, err error)
-	GetTopLosers(chain constants.Chain) (resp types.TokenDetailsResp, err error)
+	GetTokenPrice(chain constants.Chain, contractAddress string, options *types.GetPriceOptions) (types.TokenPrice, error)
+	GetTokenPriceBySymbol(symbol string, options *types.GetPriceWithSymbolOptions) (resp types.PriceWithSymbolResp, err error)
+	GetTopGainers(chain constants.Chain, options *types.GetTopGainersOptions) (resp types.TokenDetailsResp, err error)
+	GetTopLosers(chain constants.Chain, options *types.GetTopLosersOptions) (resp types.TokenDetailsResp, err error)
 	GetLPTokens(chain constants.Chain, lptoken string) (resp types.TokenListWithPrice, err error)
 	GetMultipleTokenPrice(chain constants.Chain, tokenList []string) (resp types.TokenListWithPrice, err error)
-	GetTokenPriceBySymbol(symbol string) (resp types.PriceWithSymbolResp, err error)
 }
