@@ -1,7 +1,6 @@
 package transaction_details
 
 import (
-	"fmt"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
@@ -28,7 +27,7 @@ func (txn TxnDetailsImpl) GetTokenTxns(chain constants.Chain, address string, op
 	}
 	var urlVals url.Values
 	if options != nil {
-		urlVals = httpclient.QueryParamHelper(getTxnQueryParams(*options))
+		urlVals = httpclient.QueryParamHelper(options.getMappableQueryParams())
 	}
 	path := strings.Replace(constants.TXN_GetTokenTxns.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
@@ -59,7 +58,7 @@ func (txn TxnDetailsImpl) GetTokenTxnsV2(chain constants.Chain, address string, 
 	}
 	var urlVals url.Values
 	if options != nil {
-		urlVals = httpclient.QueryParamHelper(getTxnQueryParams(*options))
+		urlVals = httpclient.QueryParamHelper(options.getMappableQueryParams())
 	}
 	path := strings.Replace(constants.TXN_GetTokenTxnsV2.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
