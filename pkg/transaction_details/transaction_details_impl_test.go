@@ -17,8 +17,10 @@ func TestTxnDetailsImpl_GetTokenTxns(t *testing.T) {
 	validChain := constants.ETH
 	var validOptions = TokenTxnsOpts{
 		Contract: "0xf8C3527CC04340b208C854E985240c02F7B7793f",
-		Page:     1,
-		PageSize: 10,
+		PaginationOptions: PaginationOptions{
+			Page:     1,
+			PageSize: 10,
+		},
 	}
 
 	t.Run("Evaluating Get Token Txns with no options", func(t *testing.T) {
@@ -63,8 +65,10 @@ func TestTxnDetailsImpl_GetTokenTxns(t *testing.T) {
 		avalancheAddr := "0x59DD353A69e2370ca98C1ff32587131b779a587a"
 		avalancheChain := constants.AVALANCHE
 		resp, err := txnDetails.GetTokenTxns(avalancheChain, avalancheAddr, &TokenTxnsOpts{
-			PageSize: 10,
-			Page:     2,
+			PaginationOptions: PaginationOptions{
+				Page:     2,
+				PageSize: 10,
+			},
 		})
 
 		ast.NoError(err, "There should be no error for a valid call")
@@ -82,8 +86,10 @@ func TestTxnDetailsImpl_GetTokenTxnsV2(t *testing.T) {
 	validChain := constants.ETH
 	var validOptions = TokenTxnsOpts{
 		Contract: "0xf8C3527CC04340b208C854E985240c02F7B7793f",
-		Page:     1,
-		PageSize: 10,
+		PaginationOptions: PaginationOptions{
+			Page:     1,
+			PageSize: 10,
+		},
 	}
 
 	t.Run("Evaluating Get Token TxnsV2 with no options", func(t *testing.T) {

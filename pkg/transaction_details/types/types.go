@@ -1,5 +1,7 @@
 package types
 
+import "math/big"
+
 type TokenTxn struct {
 	Page         int `json:"page"`
 	TotalPages   int `json:"total_pages"`
@@ -109,4 +111,44 @@ type TokenTxnV2 struct {
 			To        string  `json:"to"`
 		} `json:"received,omitempty"`
 	} `json:"transactions"`
+}
+type RawTransactionsResponseV1 struct {
+	TotalCount   int              `json:"total_count"`
+	NextPage     bool             `json:"next_page"`
+	Transactions []RawTransaction `json:"result"`
+}
+
+type RawTokenTransfer struct {
+	From         string   `json:"from"`
+	To           string   `json:"to"`
+	Token        string   `json:"token"`
+	Value        *big.Int `json:"value"`
+	TokenDecimal int64    `json:"token_decimal,omitempty"`
+	TokenName    string   `json:"token_name,omitempty"`
+	TokenSymbol  string   `json:"token_symbol,omitempty"`
+	TokenImage   string   `json:"token_image,omitempty"`
+	LogIndex     string   `json:"log_index"`
+}
+
+type RawAdditionalData struct {
+	Status   int64    `json:"status"`
+	Nonce    *big.Int `json:"nonce"`
+	GasLimit *big.Int `json:"gas_limit"`
+	GasUsed  *big.Int `json:"gas_used"`
+	GasPrice *big.Int `json:"gas_price"`
+	Data     string   `json:"data"`
+}
+type RawTransaction struct {
+	TxHash         string             `json:"tx_hash"`
+	From           string             `json:"from"`
+	To             string             `json:"to"`
+	Value          *big.Int           `json:"value"`
+	BlockHash      string             `json:"block_hash"`
+	BlockNumber    string             `json:"block_number"`
+	BlockTime      *big.Int           `json:"block_time"`
+	Fees           *big.Int           `json:"fees"`
+	AdditionalData RawAdditionalData  `json:"additional_data"`
+	TokenTransfers []RawTokenTransfer `json:"token_transfers"`
+	ShardId        int                `json:"shard_id"`
+	ToShardId      int                `json:"to_shard_id"`
 }
