@@ -175,3 +175,39 @@ func getTestTxnDetails() TxnDetailsImpl {
 	}{AuthKey: authKey, HttpClient: nil, Environment: constants.Prod}, Client: httpClient})
 	return txnDetails
 }
+
+func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
+	txnDetails := getTestTxnDetails()
+	ast := assert.New(t)
+	validAddr := "0x5a666c7d92E5fA7Edcb6390E4efD6d0CDd69cF37"
+	validChain := constants.ETH
+
+	t.Run("Valid params should make a call with no errors", func(t *testing.T) {
+
+		resp, err := txnDetails.GetRawTransactionsForAddress(validChain, validAddr, &RawTransactionOptions{
+			PaginationOptions: PaginationOptions{
+				Page:     1,
+				PageSize: 2,
+			},
+		})
+
+		ast.NoError(err, "there should be no error for a valid call")
+		ast.NotEmpty(resp.Transactions, "this call should have valid transactions present")
+		ast.Len(resp.Transactions, 2, "There should be only two transactions for this call.")
+	})
+
+	t.Run("Valid params should make a call with no errors", func(t *testing.T) {
+
+		resp, err := txnDetails.GetRawTransactionsForAddress(constants.HUOBI, validAddr, &RawTransactionOptions{
+			PaginationOptions: PaginationOptions{
+				Page:     1,
+				PageSize: 2,
+			},
+		})
+
+		ast.EqualError(err, constants.UnsupportedChainError.Error(), "Call should err for an unsupported chain")
+		ast.NotEmpty(resp.Transactions, "this call should have valid transactions present")
+		ast.Len(resp.Transactions, 2, "There should be only two transactions for this call.")
+	})
+
+}
