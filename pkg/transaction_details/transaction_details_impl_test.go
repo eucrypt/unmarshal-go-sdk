@@ -11,7 +11,7 @@ import (
 )
 
 func TestTxnDetailsImpl_GetTokenTxns(t *testing.T) {
-	txnDetails := getTextTxnDetails()
+	txnDetails := getTestTxnDetails()
 	ast := assert.New(t)
 	validAddr := "demo.eth"
 	validChain := constants.ETH
@@ -80,7 +80,7 @@ func TestTxnDetailsImpl_GetTokenTxns(t *testing.T) {
 
 func TestTxnDetailsImpl_GetTokenTxnsV2(t *testing.T) {
 
-	txnDetails := getTextTxnDetails()
+	txnDetails := getTestTxnDetails()
 	ast := assert.New(t)
 	validAddr := "demo.eth"
 	validChain := constants.ETH
@@ -134,7 +134,7 @@ func TestTxnDetailsImpl_GetTokenTxnsV2(t *testing.T) {
 }
 
 func TestTxnDetailsImpl_GetTxnDetails(t *testing.T) {
-	txnDetails := getTextTxnDetails()
+	txnDetails := getTestTxnDetails()
 	ast := assert.New(t)
 	validID := "0x4717c3987e8b1cdb831a45f99a0dbc1390ee53b704e8e171fa2154e598fdec1e"
 
@@ -164,7 +164,7 @@ func TestTxnDetailsImpl_GetTxnDetails(t *testing.T) {
 	})
 }
 
-func getTextTxnDetails() TxnDetailsImpl {
+func getTestTxnDetails() TxnDetailsImpl {
 	httpClient := httpclient.NewHttpJSONClient(constants.Environment.GetEndpoint("prod"))
 	authKey := os.Getenv("API_KEY")
 	httpClient.DefaultQuery = map[string]string{"auth_key": authKey}
