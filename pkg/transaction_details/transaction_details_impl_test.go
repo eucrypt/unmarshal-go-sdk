@@ -184,7 +184,7 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 
 	t.Run("Valid params should make a call with no errors", func(t *testing.T) {
 
-		resp, err := txnDetails.GetRawTransactionsForAddress(validChain, validAddr, &RawTransactionOptions{
+		resp, err := txnDetails.GetRawTransactionsForAddress(validChain, validAddr, &TransactionDetailsOpts{
 			PaginationOptions: PaginationOptions{
 				Page:     1,
 				PageSize: 2,
@@ -198,7 +198,7 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 
 	t.Run("Valid params should make a call with no errors", func(t *testing.T) {
 
-		resp, err := txnDetails.GetRawTransactionsForAddress(constants.HUOBI, validAddr, &RawTransactionOptions{
+		resp, err := txnDetails.GetRawTransactionsForAddress(constants.HUOBI, validAddr, &TransactionDetailsOpts{
 			PaginationOptions: PaginationOptions{
 				Page:     1,
 				PageSize: 2,

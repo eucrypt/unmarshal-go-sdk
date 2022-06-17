@@ -22,7 +22,7 @@ const (
 	TXN_GetTokenTxns             APIName = "v1/:chain/address/:address/transactions"
 	TXN_GetTxnDetails            APIName = "v1/:chain/transactions/:txnID"
 	TXN_GetTokenTxnsV2           APIName = "v2/:chain/address/:address/transactions"
-	TXN_GetRawTransactionDetails APIName = "/v1/:chain/address/:address/transactions/raw"
+	TXN_GetRawTransactionDetails APIName = "v3/:chain/address/:address/transactions"
 	PROTO_GetPositions           APIName = "v2/protocols/:protocol/address/:address/positions"
 	PROTO_GetPairs               APIName = "v2/protocols/:protocol/pairs"
 )

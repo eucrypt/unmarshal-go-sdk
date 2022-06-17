@@ -69,13 +69,13 @@ func (txn TxnDetailsImpl) GetTokenTxnsV2(chain constants.Chain, address string, 
 
 //GetRawTransactionsForAddress Gets the raw transaction details for a particular address.
 //The Details include data passed during the transaction as well as detailed information about gas usage. It does still include token transfers if they were made
-func (txn TxnDetailsImpl) GetRawTransactionsForAddress(chain constants.Chain, address string, options *RawTransactionOptions) (resp types.RawTransactionsResponseV1, err error) {
+func (txn TxnDetailsImpl) GetRawTransactionsForAddress(chain constants.Chain, address string, options *TransactionDetailsOpts) (resp types.RawTransactionsResponseV1, err error) {
 	if !constants.TXN_GetRawTransactionDetails.SupportsChain(chain) {
 		return types.RawTransactionsResponseV1{}, constants.UnsupportedChainError
 	}
 	var urlVals url.Values
 	if options != nil {
-		urlVals = httpclient.QueryParamHelper(options.getMappableQueryParams())
+		urlVals = httpclient.QueryParamHelper(options.getMappableQueryParamsForRawFormat())
 	}
 	path := strings.Replace(constants.TXN_GetTokenTxns.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
