@@ -77,7 +77,7 @@ func (txn TxnDetailsImpl) GetRawTransactionsForAddress(chain constants.Chain, ad
 	if options != nil {
 		urlVals = httpclient.QueryParamHelper(options.getMappableQueryParamsForRawFormat())
 	}
-	path := strings.Replace(constants.TXN_GetTokenTxns.GetURI(), ":chain", chain.String(), 1)
+	path := strings.Replace(constants.TXN_GetRawTransactionDetails.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
 	err = txn.sess.Client.Get(&resp, path, urlVals)
 
