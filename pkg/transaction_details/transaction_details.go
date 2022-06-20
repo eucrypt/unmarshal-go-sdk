@@ -9,40 +9,57 @@ import (
 type TokenTxnsOpts struct {
 	Contract string
 	PaginationOptions
+	BlockLimitsOpts
 }
+
 type PaginationOptions struct {
 	Page     int
 	PageSize int
 }
 
-type TransactionDetailsOpts struct {
-	PaginationOptions
+type BlockLimitsOpts struct {
 	FromBlock uint64
 	ToBlock   uint64
 }
 
-const RawFormat = "raw"
-
-func (p PaginationOptions) getPaginationAsQueryParams() map[string]interface{} {
-	var queryParams = map[string]interface{}{
-		"page":     fmt.Sprint(p.Page),
-		"pageSize": fmt.Sprint(p.PageSize),
-	}
-	return queryParams
+type TransactionDetailsOpts struct {
+	PaginationOptions
+	BlockLimitsOpts
+	format transactionFormats
 }
 
+type transactionFormats string
+
+const (
+	Standard transactionFormats = "standard"
+	Raw      transactionFormats = "raw"
+)
+
 func (options TokenTxnsOpts) getMappableQueryParams() map[string]interface{} {
-	var queryParams = options.getPaginationAsQueryParams()
+	queryParams := make(map[string]interface{})
+	options.mustAddPaginationToQueryParams(queryParams)
+	options.mustAddBlockLimitsToQueryParams(queryParams)
 	queryParams["contract"] = options.Contract
 	return queryParams
 }
 
-func (options TransactionDetailsOpts) getMappableQueryParamsForRawFormat() map[string]interface{} {
-	var queryParams = options.getPaginationAsQueryParams()
-	queryParams["fromBlock"] = options.FromBlock
-	queryParams["toBlock"] = options.ToBlock
-	queryParams["format"] = RawFormat
+func (options TransactionDetailsOpts) getMappableQueryParams() map[string]interface{} {
+	queryParams := make(map[string]interface{})
+	options.mustAddPaginationToQueryParams(queryParams)
+	options.mustAddBlockLimitsToQueryParams(queryParams)
+	queryParams["format"] = options.format
 	return queryParams
+}
+
+func (p PaginationOptions) mustAddPaginationToQueryParams(queryParams map[string]interface{}) {
+	queryParams["page"] = fmt.Sprint(p.Page)
+	queryParams["pageSize"] = fmt.Sprint(p.PageSize)
+	return
+}
+
+func (blk BlockLimitsOpts) mustAddBlockLimitsToQueryParams(queryParams map[string]interface{}) {
+	queryParams["fromBlock"] = blk.FromBlock
+	queryParams["toBlock"] = blk.ToBlock
 }
 
 type TransactionDetails interface {

@@ -74,9 +74,11 @@ func (txn TxnDetailsImpl) GetRawTransactionsForAddress(chain constants.Chain, ad
 		return types.RawTransactionsResponseV1{}, constants.UnsupportedChainError
 	}
 	var urlVals url.Values
-	if options != nil {
-		urlVals = httpclient.QueryParamHelper(options.getMappableQueryParamsForRawFormat())
+	if options == nil {
+		options = &TransactionDetailsOpts{}
 	}
+	options.format = Raw
+	urlVals = httpclient.QueryParamHelper(options.getMappableQueryParams())
 	path := strings.Replace(constants.TXN_GetRawTransactionDetails.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
 	err = txn.sess.Client.Get(&resp, path, urlVals)

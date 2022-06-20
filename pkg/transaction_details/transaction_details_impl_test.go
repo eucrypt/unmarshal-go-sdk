@@ -195,6 +195,13 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 		ast.NotEmpty(resp.Transactions, "this call should have valid transactions present")
 		ast.Len(resp.Transactions, 2, "There should be only two transactions for this call.")
 	})
+	t.Run("missing options should fill defaults", func(t *testing.T) {
+
+		resp, err := txnDetails.GetRawTransactionsForAddress(validChain, validAddr, nil)
+
+		ast.NoError(err, "there should be no error for a valid call")
+		ast.Empty(resp.Transactions, "Should return empty transaction response for invalid page number")
+	})
 
 	t.Run("Invalid chain should cause error", func(t *testing.T) {
 
