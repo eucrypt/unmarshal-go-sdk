@@ -2,7 +2,6 @@ package constants
 
 import (
 	"errors"
-	"strings"
 )
 
 type Chain string
@@ -46,17 +45,3 @@ func (c Chain) String() string {
 }
 
 var UnsupportedChainError = errors.New("unsupported chain for API")
-
-var chainIDMap = map[string]Chain{
-	"1":     ETH,
-	"56":    BSC,
-	"137":   MATIC,
-	"43114": AVALANCHE,
-	"4":     ETH_RINKEBY,
-	"97":    BSC_TESTNET,
-	"80001": MATIC_TESTNET,
-}
-
-func GetChainNameFromChainIDBase10String(chainID string) Chain {
-	return chainIDMap[strings.TrimSpace(chainID)]
-}
