@@ -138,6 +138,7 @@ type RawAdditionalData struct {
 	GasPrice *big.Int `json:"gas_price"`
 	Data     string   `json:"data"`
 }
+
 type RawTransaction struct {
 	TxHash         string             `json:"tx_hash"`
 	From           string             `json:"from"`
@@ -149,6 +150,7 @@ type RawTransaction struct {
 	Fees           *big.Int           `json:"fees"`
 	AdditionalData RawAdditionalData  `json:"additional_data"`
 	TokenTransfers []RawTokenTransfer `json:"token_transfers"`
+	TxIndex        uint               `json:"tx_index"`
 	ShardId        int                `json:"shard_id"`
 	ToShardId      int                `json:"to_shard_id"`
 }
