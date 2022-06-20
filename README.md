@@ -313,3 +313,8 @@ func main() {
     </tr>
   </tbody>
 </table>
+
+Additionally, support for raw transaction details include:
+
+`GetRawTransactionsForAddress` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`, 
+                                  `Polygon: Mumbai`, `Avalanche: Mainnet`
