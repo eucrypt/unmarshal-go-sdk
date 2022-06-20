@@ -196,7 +196,7 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 		ast.Len(resp.Transactions, 2, "There should be only two transactions for this call.")
 	})
 
-	t.Run("Valid params should make a call with no errors", func(t *testing.T) {
+	t.Run("Invalid chain should cause error", func(t *testing.T) {
 
 		resp, err := txnDetails.GetRawTransactionsForAddress(constants.HUOBI, validAddr, &TransactionDetailsOpts{
 			PaginationOptions: PaginationOptions{
@@ -206,8 +206,7 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 		})
 
 		ast.EqualError(err, constants.UnsupportedChainError.Error(), "Call should err for an unsupported chain")
-		ast.NotEmpty(resp.Transactions, "this call should have valid transactions present")
-		ast.Len(resp.Transactions, 2, "There should be only two transactions for this call.")
+		ast.Empty(resp, "call should return an empty object")
 	})
 
 }
