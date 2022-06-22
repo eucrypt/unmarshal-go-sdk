@@ -113,9 +113,10 @@ type TokenTxnV2 struct {
 	} `json:"transactions"`
 }
 type RawTransactionsResponseV1 struct {
-	TotalCount   int              `json:"total_count"`
-	NextPage     bool             `json:"next_page"`
-	Transactions []RawTransaction `json:"result"`
+	TotalCount        int              `json:"total_count"`
+	NextPage          bool             `json:"next_page"`
+	LastVerifiedBlock *big.Int         `json:"last_verified_block"`
+	Transactions      []RawTransaction `json:"result"`
 }
 
 type RawTokenTransfer struct {
