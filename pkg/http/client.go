@@ -65,7 +65,7 @@ var DefaultErrorHandler = func(res *http.Response, uri string) error {
 }
 
 //GetWithContext makes and HTTP GET call with the provided values after appending the default query values
-//in additon to any existing ones.
+//in addition to any existing ones.
 func (r *Request) GetWithContext(result interface{}, path string, query url.Values, ctx context.Context) error {
 	queryStr := r.safeGetQueryStrWithDefaults(query)
 	uri := strings.Join([]string{r.GetBase(path), queryStr}, "?")
