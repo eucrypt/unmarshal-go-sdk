@@ -27,6 +27,7 @@ func (r *Request) SetTimeout(seconds time.Duration) {
 	r.HttpClient.Timeout = time.Second * seconds
 }
 
+//goland:noinspection GoUnusedExportedFunction
 func NewHttpClient(baseUrl string) Request {
 	return Request{
 		Headers:      make(map[string]string),
@@ -89,12 +90,13 @@ func (r *Request) safeGetQueryStrWithDefaults(query url.Values) string {
 	return query.Encode()
 }
 
-func (r *Request) Post(result interface{}, path string, body interface{}) error {
+func (r *Request) Post(result interface{}, path string, body interface{}, query url.Values) error {
 	buf, err := GetBody(body)
 	if err != nil {
 		return err
 	}
-	uri := r.GetBase(path)
+	queryStr := r.safeGetQueryStrWithDefaults(query)
+	uri := strings.Join([]string{r.GetBase(path), queryStr}, "?")
 	return r.Execute("POST", uri, buf, result, context.Background())
 }
 
