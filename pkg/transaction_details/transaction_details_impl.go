@@ -1,6 +1,7 @@
 package transaction_details
 
 import (
+	"fmt"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
@@ -82,6 +83,28 @@ func (txn TxnDetailsImpl) GetRawTransactionsForAddress(chain constants.Chain, ad
 	path := strings.Replace(constants.TXN_GetRawTransactionDetails.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
 	err = txn.sess.Client.Get(&resp, path, urlVals)
+
+	return
+}
+
+func (txn TxnDetailsImpl) GetTransactionsByCursor(chain constants.Chain, startCursor *types.AddressTxCursor,
+	endCursor *types.AddressTxCursor, pageLimit uint) (resp types.GetTransactionByCursorResponse, err error) {
+
+	if !constants.TXN_GetTransactionsByCursor.SupportsChain(chain) {
+		err = constants.UnsupportedChainError
+		return
+	}
+
+	var body = types.TransactionByCursorRequest{
+		StartCursor: startCursor,
+		EndCursor:   endCursor,
+	}
+	queryParams := httpclient.QueryParamHelper(map[string]interface{}{
+		"per_page": fmt.Sprintf("%d", pageLimit),
+	})
+	path := strings.Replace(constants.TXN_GetRawTransactionDetails.GetURI(), ":chain", chain.String(), 1)
+
+	err = txn.sess.Client.Post(&resp, path, body, queryParams)
 
 	return
 }

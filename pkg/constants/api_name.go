@@ -23,6 +23,7 @@ const (
 	TXN_GetTxnDetails            APIName = "v1/:chain/transactions/:txnID"
 	TXN_GetTokenTxnsV2           APIName = "v2/:chain/address/:address/transactions"
 	TXN_GetRawTransactionDetails APIName = "v3/:chain/address/:address/transactions"
+	TXN_GetTransactionsByCursor  APIName = "/v3/:chain/transactions-by-cursor"
 	PROTO_GetPositions           APIName = "v2/protocols/:protocol/address/:address/positions"
 	PROTO_GetPairs               APIName = "v2/protocols/:protocol/pairs"
 )
@@ -43,6 +44,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 	TXN_GetTxnDetails:            {ETH: true, BSC: true, MATIC: true, SOL: true, AVALANCHE: true, XDC: true},
 	TXN_GetTokenTxnsV2:           {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, XDC: true},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
+	TXN_GetTransactionsByCursor:  rawTxnSupported,
 }
 
 //SupportsChain Allows a caller to know if a chain specific API supports a passed valid chain
