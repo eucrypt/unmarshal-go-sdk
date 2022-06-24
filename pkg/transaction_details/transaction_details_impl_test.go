@@ -4,7 +4,9 @@ import (
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
+	"github.com/eucrypt/unmarshal-go-sdk/pkg/transaction_details/types"
 	"github.com/stretchr/testify/assert"
+	"math/big"
 	"net/http"
 	"os"
 	"testing"
@@ -214,6 +216,40 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 
 		ast.EqualError(err, constants.UnsupportedChainError.Error(), "Call should err for an unsupported chain")
 		ast.Empty(resp, "call should return an empty object")
+	})
+
+}
+
+//@dev test Pending until gateway pr is merged
+func TestTxnDetailsImpl_GetTransactionsByCursor(t *testing.T) {
+	txnDetails := getTestTxnDetails()
+	ast := assert.New(t)
+	validAddr := "0x5a666c7d92E5fA7Edcb6390E4efD6d0CDd69cF37"
+	validChain := constants.ETH
+	t.Run("Valid params should make a call with no errors", func(t *testing.T) {
+
+		resp, err := txnDetails.GetTransactionsByCursor(validChain, &types.AddressTxCursor{
+			ContractAddress: validAddr,
+			BlockNumber:     big.NewInt(12141206),
+			SeqID:           0,
+		}, nil, 10)
+
+		ast.NoError(err, "there should be no error for a valid call")
+		ast.NotEmpty(resp.Transactions, "this call should have valid transactions present")
+		ast.Len(resp.Transactions, 10, "There should be 10 transactions for this call.")
+		ast.NotNil(resp.EndCursor, "there should be an end cursor in the call as the start cursor was passed")
+	})
+
+	t.Run("wrong chain should error", func(t *testing.T) {
+		invalidChain := constants.HUOBI
+		resp, err := txnDetails.GetTransactionsByCursor(invalidChain, &types.AddressTxCursor{
+			ContractAddress: validAddr,
+			BlockNumber:     big.NewInt(12141206),
+			SeqID:           0,
+		}, nil, 10)
+
+		ast.EqualError(err, constants.UnsupportedChainError.Error(), "an unsupported chain should present an error")
+		ast.Empty(resp, "erroring call should return and empty object")
 	})
 
 }

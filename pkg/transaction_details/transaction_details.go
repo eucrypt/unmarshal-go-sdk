@@ -30,6 +30,7 @@ type TransactionDetailsOpts struct {
 
 type transactionFormats string
 
+//goland:noinspection GoUnusedConst
 const (
 	Standard transactionFormats = "standard"
 	Raw      transactionFormats = "raw"
@@ -68,4 +69,5 @@ type TransactionDetails interface {
 	GetTokenTxnsV2(chain constants.Chain, address string, options *TokenTxnsOpts) (resp types.TokenTxnV2, err error)
 	GetRawTransactionsForAddress(chain constants.Chain, address string, options *TransactionDetailsOpts) (
 		resp types.RawTransactionsResponseV1, err error)
+	GetTransactionsByCursor(chain constants.Chain, startCursor *types.AddressTxCursor, endCursor *types.AddressTxCursor, pageLimit uint) (resp types.GetTransactionByCursorResponse, err error)
 }
