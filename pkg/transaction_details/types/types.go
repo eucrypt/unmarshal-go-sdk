@@ -155,3 +155,21 @@ type RawTransaction struct {
 	ShardId        int                `json:"shard_id"`
 	ToShardId      int                `json:"to_shard_id"`
 }
+
+type TransactionByCursorRequest struct {
+	StartCursor *AddressTxCursor `json:"start_cursor,omitempty"`
+	EndCursor   *AddressTxCursor `json:"end_cursor,omitempty"`
+}
+
+type AddressTxCursor struct {
+	ContractAddress string   `json:"contract_address"`
+	BlockNumber     *big.Int `json:"block_number" `
+	SeqID           uint64   `json:"seq_id"`
+}
+
+type GetTransactionByCursorResponse struct {
+	EndCursor         *AddressTxCursor `json:"end_cursor,omitempty"`
+	StartCursor       *AddressTxCursor `json:"start_cursor,omitempty"`
+	LastVerifiedBlock *big.Int         `json:"last_verified_block"`
+	Transactions      []RawTransaction `json:"transactions"`
+}
