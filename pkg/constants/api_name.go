@@ -28,9 +28,9 @@ const (
 )
 
 var allowedCallersByChain = map[APIName]map[Chain]bool{
-	PS_GetPriceWithAddress:       priceStoreSupportedWithAvax,
-	PS_GetTokensPrice:            priceStoreSupportedWithAvax,
-	PS_GetLpTokenPrice:           priceStoreSupportedWithAvax,
+	PS_GetPriceWithAddress:       priceStoreSupported,
+	PS_GetTokensPrice:            priceStoreSupported,
+	PS_GetLpTokenPrice:           priceStoreSupported,
 	PS_GetLosers:                 priceStoreSupported,
 	PS_GetGainers:                priceStoreSupported,
 	ASSETS_GetTokenAssets:        allChains,
@@ -39,9 +39,9 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 	NFT_GetTxns:                  nftEVMSupport,
 	NFT_GetDetailsByID:           nftEVMSupport,
 	NFT_GetHoldersByID:           nftEVMSupport,
-	TXN_GetTokenTxns:             {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, AVALANCHE: true, XDC: true},
-	TXN_GetTxnDetails:            {ETH: true, BSC: true, MATIC: true, SOL: true, AVALANCHE: true, XDC: true},
-	TXN_GetTokenTxnsV2:           {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, XDC: true},
+	TXN_GetTokenTxns:             {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, AVALANCHE: true, XDC: true, OPTIMISM: true},
+	TXN_GetTxnDetails:            {ETH: true, BSC: true, MATIC: true, SOL: true, AVALANCHE: true, XDC: true, OPTIMISM: true},
+	TXN_GetTokenTxnsV2:           {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, XDC: true, OPTIMISM: true},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }
 

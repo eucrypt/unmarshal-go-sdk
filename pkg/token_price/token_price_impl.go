@@ -18,7 +18,7 @@ func New(sess session.Session) PriceStoreImpl {
 	return PriceStoreImpl{sess}
 }
 
-// GetTokenPriceAtInstant GetPriceAtInstant accepts a chain, contract address and additional options.
+// GetTokenPrice accepts a chain, contract address and additional options.
 func (p PriceStoreImpl) GetTokenPrice(chain constants.Chain, contractAddress string, options *types.GetPriceOptions) (resp types.TokenPrice, err error) {
 	if !constants.PS_GetTokensPrice.SupportsChain(chain) {
 		return types.TokenPrice{}, constants.UnsupportedChainError
