@@ -19,6 +19,7 @@ const (
 	ZILLIQA       Chain = "zilliqa"
 	HUOBI         Chain = "heco"
 	AVALANCHE     Chain = "avalanche"
+	OPTIMISM      Chain = "optimism"
 )
 
 //This should be manually changed when a new chain starts being supported
@@ -31,11 +32,12 @@ var allChains = map[Chain]bool{
 	ZILLIQA:   true,
 	HUOBI:     true,
 	AVALANCHE: true,
+	OPTIMISM:  true,
 }
 
 var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
-var priceStoreSupportedWithAvax = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true}
-var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true, MATIC_TESTNET: true}
+
+var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true, MATIC_TESTNET: true, OPTIMISM: true}
 
 var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true}
 
