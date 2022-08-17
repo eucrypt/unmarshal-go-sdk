@@ -6,6 +6,7 @@ import (
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/token_details/types"
+	"net/url"
 	"strings"
 )
 
@@ -18,10 +19,18 @@ func New(sess session.Session) TokenStoreV1 {
 }
 
 //GetTokenDetailsByContract returns token data when provided with a valid contract.
-//The search happens across every supported chain
-func (t TokenStoreV1) GetTokenDetailsByContract(contractAddress string) (resp types.TokenDetails, err error) {
+//The search happens across every supported chain by default, additionally accepting the chain param for a more
+//specific search
+func (t TokenStoreV1) GetTokenDetailsByContract(contractAddress string, options *TokenDetailsOptions) (
+	resp types.TokenDetails, err error) {
+	var urlVals url.Values
+	if options != nil {
+		urlVals = httpclient.QueryParamHelper(map[string]interface{}{
+			"chain": options.Chain.String(),
+		})
+	}
 	path := strings.Replace(constants.TS_GetDetailsByContract.GetURI(), ":address", contractAddress, 1)
-	err = t.sess.Client.Get(&resp, path, nil)
+	err = t.sess.Client.Get(&resp, path, urlVals)
 	return
 }
 
