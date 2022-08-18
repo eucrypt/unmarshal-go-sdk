@@ -17,13 +17,39 @@ func TestTokenStoreV1_GetTokenDetailsWithContract(t *testing.T) {
 	ValidContract := "0x5a666c7d92e5fa7edcb6390e4efd6d0cdd69cf37"
 	ast := assert.New(t)
 	t.Run("Evaluating get Token Details with valid data", func(t *testing.T) {
-		resp, err := ts.GetTokenDetailsByContract(ValidContract)
+		resp, err := ts.GetTokenDetailsByContract(ValidContract, nil)
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+	})
+
+	t.Run("Evaluating get Token Details with valid data and specific chain", func(t *testing.T) {
+		chain := constants.BSC
+		opts := TokenDetailsOptions{Chain: chain}
+		resp, err := ts.GetTokenDetailsByContract("0x111111111117dC0aa78b770fA6A738034120C302", &opts)
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		ast.Equal(resp.Blockchain, chain.String())
+		//fmt.Printf("%#v", resp)
+	})
+
+	t.Run("Evaluating get Token Details with valid data and specific chain", func(t *testing.T) {
+		chain := constants.ETH
+		opts := TokenDetailsOptions{Chain: chain}
+		resp, err := ts.GetTokenDetailsByContract("0x111111111117dC0aa78b770fA6A738034120C302", &opts)
+		ast.NoError(err, "There should be no error for a valid call")
+		ast.NotEmpty(resp, "The response should not be empty")
+		ast.Equal(resp.Blockchain, chain.String())
+		//fmt.Printf("%#v", resp)
+	})
+
+	t.Run("Evaluating get Token Details with valid data", func(t *testing.T) {
+		resp, err := ts.GetTokenDetailsByContract(ValidContract, nil)
 		ast.NoError(err, "There should be no error for a valid call")
 		ast.NotEmpty(resp, "The response should not be empty")
 	})
 
 	t.Run("Evaluating get Token Details with invalid data", func(t *testing.T) {
-		resp, _ := ts.GetTokenDetailsByContract("")
+		resp, _ := ts.GetTokenDetailsByContract("", nil)
 		ast.Empty(resp, "The response should be empty for invalid data")
 	})
 
