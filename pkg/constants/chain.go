@@ -37,11 +37,14 @@ var allChains = map[Chain]bool{
 	AVALANCHE: true,
 	OPTIMISM:  true,
 	ARBITRUM:  true,
+	CELO:      true,
+	FANTOM:    true,
 }
 
 var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
 
-var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true, MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true}
+var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true,
+	MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true, CELO: true, FANTOM: true}
 
 var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true}
 
