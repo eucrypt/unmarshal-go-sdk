@@ -21,6 +21,8 @@ const (
 	AVALANCHE     Chain = "avalanche"
 	OPTIMISM      Chain = "optimism"
 	ARBITRUM      Chain = "arbitrum"
+	CELO          Chain = "celo"
+	FANTOM        Chain = "fantom"
 )
 
 //This should be manually changed when a new chain starts being supported
