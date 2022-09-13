@@ -363,4 +363,4 @@ func main() {
 Additionally, support for raw transaction details include:
 
 `GetRawTransactionsForAddress` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`,
-`Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`
+`Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`
