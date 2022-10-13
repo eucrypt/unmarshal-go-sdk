@@ -411,3 +411,5 @@ Additionally, support for raw transaction details include:
 `Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`, 
 `Fuse: Mainnet`, `Cronos: Mainnet`
 
+This API includes more details and abstains from including price at the time of the transaction
+
