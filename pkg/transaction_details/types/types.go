@@ -48,6 +48,7 @@ type TxnByID struct {
 	From                string `json:"from"`
 	To                  string `json:"to"`
 	Fee                 string `json:"fee"`
+	GasPrice            string `json:"gas_price"`
 	Date                int    `json:"date"`
 	Status              string `json:"status"`
 	Type                string `json:"type"`
@@ -67,7 +68,6 @@ type TxnByID struct {
 		To       string `json:"to"`
 	} `json:"sent"`
 }
-
 type TokenTxnV2 struct {
 	Page         int `json:"page"`
 	TotalPages   int `json:"total_pages"`
