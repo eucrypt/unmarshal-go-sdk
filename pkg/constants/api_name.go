@@ -40,11 +40,11 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 	NFT_GetDetailsByID:       nftEVMSupport,
 	NFT_GetHoldersByID:       nftEVMSupport,
 	TXN_GetTokenTxns: {ETH: true, BSC: true, MATIC: true, SOL: true, ZILLIQA: true, AVALANCHE: true,
-		XDC: true, OPTIMISM: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true, FUSE: true, CRONOS: true},
+		XDC: true, OPTIMISM: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true, FUSE: true},
 	TXN_GetTxnDetails: {ETH: true, BSC: true, MATIC: true, SOL: true, AVALANCHE: true, XDC: true,
-		OPTIMISM: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true, FUSE: true, CRONOS: true},
+		OPTIMISM: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true, FUSE: true},
 	TXN_GetTokenTxnsV2: {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, XDC: true, OPTIMISM: true,
-		ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true, FUSE: true, CRONOS: true},
+		ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true, FUSE: true},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }
 
