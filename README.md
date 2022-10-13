@@ -159,7 +159,7 @@ func main() {
       <th>Fantom</th>
       <th>Klaytn</th>
       <th>Fuse</th>
-      <th>Kronos</th>
+      <th>Cronos</th>
     </tr>
   </thead>
   <tbody>
@@ -409,5 +409,5 @@ Additionally, support for raw transaction details include:
 
 `GetRawTransactionsForAddress` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`,
 `Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`, 
-`Fuse: Mainnet`, `Kronos: Mainnet`
+`Fuse: Mainnet`, `Cronos: Mainnet`
 

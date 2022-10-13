@@ -25,7 +25,7 @@ const (
 	FANTOM        Chain = "fantom"
 	KLAYTN        Chain = "klaytn"
 	FUSE          Chain = "fuse"
-	KRONOS        Chain = "kronos"
+	CRONOS        Chain = "cronos"
 )
 
 //This should be manually changed when a new chain starts being supported
@@ -44,14 +44,14 @@ var allChains = map[Chain]bool{
 	FANTOM:    true,
 	KLAYTN:    true,
 	FUSE:      true,
-	KRONOS:    true,
+	CRONOS:    true,
 }
 
 var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
 
 var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true,
 	MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true,
-	FUSE: true, KRONOS: true}
+	FUSE: true, CRONOS: true}
 
 var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true}
 
