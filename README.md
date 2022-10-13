@@ -159,11 +159,13 @@ func main() {
       <th>Fantom</th>
       <th>Klaytn</th>
       <th>Fuse</th>
+      <th>Cronos</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>GetTokenAssets</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -193,6 +195,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetTokenTxns</td>
@@ -204,6 +207,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>❌</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -225,6 +229,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
+      <td>✅</td>
     </tr>
     <tr>
       <td>GetTxnDetailsV2</td>
@@ -236,6 +241,7 @@ func main() {
       <td>✅</td>
       <td>❌</td>
       <td>❌</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -257,6 +263,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetTxns - NFT</td>
@@ -264,6 +271,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -289,6 +297,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetHoldersByID</td>
@@ -296,6 +305,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -321,6 +331,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr> 
     <tr>
       <td>GetTokensPrice</td>
@@ -328,6 +339,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -353,12 +365,14 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetLosers</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -385,6 +399,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
 
   </tbody>
@@ -394,5 +409,5 @@ Additionally, support for raw transaction details include:
 
 `GetRawTransactionsForAddress` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`,
 `Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`, 
-`Fuse: Mainnet`
+`Fuse: Mainnet`, `Cronos: Mainnet`
 
