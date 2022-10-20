@@ -8,52 +8,54 @@ type Chain string
 
 //goland:noinspection GoSnakeCaseUsage
 const (
-	ETH           Chain = "ethereum"
-	ETH_RINKEBY   Chain = "rinkeby-testnet"
+	ARBITRUM      Chain = "arbitrum"
+	AVALANCHE     Chain = "avalanche"
 	BSC           Chain = "bsc"
 	BSC_TESTNET   Chain = "bsc-testnet"
+	CELO          Chain = "celo"
+	CRONOS        Chain = "cronos"
+	ETH           Chain = "ethereum"
+	ETH_RINKEBY   Chain = "rinkeby-testnet"
+	FANTOM        Chain = "fantom"
+	FUSE          Chain = "fuse"
+	HUOBI         Chain = "heco"
+	KLAYTN        Chain = "klaytn"
 	MATIC         Chain = "matic"
 	MATIC_TESTNET Chain = "matic-testnet"
-	XDC           Chain = "xinfin"
-	SOL           Chain = "solana"
-	ZILLIQA       Chain = "zilliqa"
-	HUOBI         Chain = "heco"
-	AVALANCHE     Chain = "avalanche"
 	OPTIMISM      Chain = "optimism"
-	ARBITRUM      Chain = "arbitrum"
-	CELO          Chain = "celo"
-	FANTOM        Chain = "fantom"
-	KLAYTN        Chain = "klaytn"
-	FUSE          Chain = "fuse"
-	CRONOS        Chain = "cronos"
+	SOL           Chain = "solana"
+	VELAS         Chain = "velas"
+	XDC           Chain = "xinfin"
+	ZILLIQA       Chain = "zilliqa"
 )
 
 //This should be manually changed when a new chain starts being supported
 var allChains = map[Chain]bool{
-	ETH:       true,
-	BSC:       true,
-	MATIC:     true,
-	XDC:       true,
-	SOL:       true,
-	ZILLIQA:   true,
-	HUOBI:     true,
-	AVALANCHE: true,
-	OPTIMISM:  true,
 	ARBITRUM:  true,
+	AVALANCHE: true,
+	BSC:       true,
 	CELO:      true,
-	FANTOM:    true,
-	KLAYTN:    true,
-	FUSE:      true,
 	CRONOS:    true,
+	ETH:       true,
+	FANTOM:    true,
+	FUSE:      true,
+	HUOBI:     true,
+	KLAYTN:    true,
+	MATIC:     true,
+	OPTIMISM:  true,
+	SOL:       true,
+	VELAS:     true,
+	XDC:       true,
+	ZILLIQA:   true,
 }
 
 var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
 
 var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true,
 	MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true,
-	FUSE: true, CRONOS: true}
+	FUSE: true, CRONOS: true, VELAS: true}
 
-var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true}
+var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true, VELAS: true, KLAYTN: true, FUSE: true, CRONOS: true}
 
 //String returns the string specific version of the chain
 func (c Chain) String() string {

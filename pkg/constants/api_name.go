@@ -35,7 +35,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 	PS_GetGainers:            priceStoreSupported,
 	ASSETS_GetTokenAssets:    allChains,
 	ASSETS_GetProfitsAndLoss: priceStoreSupported,
-	NFT_GetNFTAssets:         {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, SOL: true},
+	NFT_GetNFTAssets:         {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, SOL: true, VELAS: true, FUSE: true, CRONOS: true, KLAYTN: true},
 	NFT_GetTxns:              nftEVMSupport,
 	NFT_GetDetailsByID:       nftEVMSupport,
 	NFT_GetHoldersByID:       nftEVMSupport,
@@ -54,6 +54,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		SOL:       true,
 		XDC:       true,
 		ZILLIQA:   true,
+		VELAS:     true,
 	},
 	TXN_GetTxnDetails: {
 		ARBITRUM:  true,
@@ -69,6 +70,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		OPTIMISM:  true,
 		SOL:       true,
 		XDC:       true,
+		VELAS:     true,
 	},
 	TXN_GetTokenTxnsV2: {
 		ARBITRUM:  true,
@@ -83,6 +85,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MATIC:     true,
 		OPTIMISM:  true,
 		XDC:       true,
+		VELAS:     true,
 	},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }
