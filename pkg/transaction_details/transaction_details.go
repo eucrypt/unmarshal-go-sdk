@@ -65,6 +65,7 @@ func (blk BlockLimitsOpts) mustAddBlockLimitsToQueryParams(queryParams map[strin
 type TransactionDetails interface {
 	GetTokenTxns(chain constants.Chain, address string, options *TokenTxnsOpts) (resp types.TokenTxn, err error)
 	GetTxnDetails(chain constants.Chain, txnID string) (resp types.TxnByID, err error)
+	GetBulkTxnDetails(chain constants.Chain, hashList []string) (resp []types.TxnByID, err error)
 	GetTokenTxnsV2(chain constants.Chain, address string, options *TokenTxnsOpts) (resp types.TokenTxnV2, err error)
 	GetRawTransactionsForAddress(chain constants.Chain, address string, options *TransactionDetailsOpts) (
 		resp types.RawTransactionsResponseV1, err error)

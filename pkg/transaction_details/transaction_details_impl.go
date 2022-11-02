@@ -45,7 +45,22 @@ func (txn TxnDetailsImpl) GetTxnDetails(chain constants.Chain, txnID string) (re
 	path := strings.Replace(constants.TXN_GetTxnDetails.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":txnID", txnID, 1)
 	err = txn.sess.Client.Get(&resp, path, nil)
+	return
+}
 
+//GetBulkTxnDetails accepts a transaction signature or ID and returns transaction details if available.
+func (txn TxnDetailsImpl) GetBulkTxnDetails(chain constants.Chain, hashList []string) (resp []types.TxnByID, err error) {
+	if len(hashList) == 0 {
+		return nil, err
+	}
+	if !constants.TXN_GetBulkTxnDetails.SupportsChain(chain) {
+		return []types.TxnByID{}, constants.UnsupportedChainError
+	}
+
+	path := strings.Replace(constants.TXN_GetBulkTxnDetails.GetURI(), ":chain", chain.String(), 1)
+	txnID := strings.Join(hashList, ",")
+	path = strings.Replace(path, ":txnID", txnID, 1)
+	err = txn.sess.Client.Get(&resp, path, nil)
 	return
 }
 
@@ -60,10 +75,10 @@ func (txn TxnDetailsImpl) GetTokenTxnsV2(chain constants.Chain, address string, 
 	if options != nil {
 		urlVals = httpclient.QueryParamHelper(options.getMappableQueryParams())
 	}
+
 	path := strings.Replace(constants.TXN_GetTokenTxnsV2.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
 	err = txn.sess.Client.Get(&resp, path, urlVals)
-
 	return
 }
 
@@ -77,11 +92,11 @@ func (txn TxnDetailsImpl) GetRawTransactionsForAddress(chain constants.Chain, ad
 	if options == nil {
 		options = &TransactionDetailsOpts{}
 	}
+
 	options.format = Raw
 	urlVals = httpclient.QueryParamHelper(options.getMappableQueryParams())
 	path := strings.Replace(constants.TXN_GetRawTransactionDetails.GetURI(), ":chain", chain.String(), 1)
 	path = strings.Replace(path, ":address", address, 1)
 	err = txn.sess.Client.Get(&resp, path, urlVals)
-
 	return
 }
