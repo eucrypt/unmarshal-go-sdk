@@ -51,7 +51,7 @@ func (txn TxnDetailsImpl) GetTxnDetails(chain constants.Chain, txnID string) (re
 //GetBulkTxnDetails accepts a transaction signature or ID and returns transaction details if available.
 func (txn TxnDetailsImpl) GetBulkTxnDetails(chain constants.Chain, hashList []string) (resp []types.TxnByID, err error) {
 	if len(hashList) == 0 {
-		return nil, err
+		return
 	}
 	if !constants.TXN_GetBulkTxnDetails.SupportsChain(chain) {
 		return []types.TxnByID{}, constants.UnsupportedChainError

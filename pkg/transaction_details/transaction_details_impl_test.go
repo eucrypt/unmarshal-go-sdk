@@ -4,6 +4,7 @@ import (
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/constants"
 	httpclient "github.com/eucrypt/unmarshal-go-sdk/pkg/http"
 	"github.com/eucrypt/unmarshal-go-sdk/pkg/session"
+	log "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"os"
@@ -178,12 +179,11 @@ func getTestTxnDetails() TxnDetailsImpl {
 
 func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 	txnDetails := getTestTxnDetails()
-	ast := assert.New(t)
-	validAddr := "0x5a666c7d92E5fA7Edcb6390E4efD6d0CDd69cF37"
-	validChain := constants.ETH
 
 	t.Run("Valid params should make a call with no errors", func(t *testing.T) {
-
+		ast := assert.New(t)
+		validAddr := "0x5a666c7d92E5fA7Edcb6390E4efD6d0CDd69cF37"
+		validChain := constants.ETH
 		resp, err := txnDetails.GetRawTransactionsForAddress(validChain, validAddr, &TransactionDetailsOpts{
 			PaginationOptions: PaginationOptions{
 				Page:     1,
@@ -196,7 +196,9 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 		ast.Len(resp.Transactions, 2, "There should be only two transactions for this call.")
 	})
 	t.Run("missing options should fill defaults", func(t *testing.T) {
-
+		ast := assert.New(t)
+		validAddr := "0x5a666c7d92E5fA7Edcb6390E4efD6d0CDd69cF37"
+		validChain := constants.ETH
 		resp, err := txnDetails.GetRawTransactionsForAddress(validChain, validAddr, nil)
 
 		ast.NoError(err, "there should be no error for a valid call")
@@ -204,7 +206,8 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 	})
 
 	t.Run("Invalid chain should cause error", func(t *testing.T) {
-
+		ast := assert.New(t)
+		validAddr := "0x5a666c7d92E5fA7Edcb6390E4efD6d0CDd69cF37"
 		resp, err := txnDetails.GetRawTransactionsForAddress(constants.HUOBI, validAddr, &TransactionDetailsOpts{
 			PaginationOptions: PaginationOptions{
 				Page:     1,
@@ -214,6 +217,43 @@ func TestTxnDetailsImpl_GetRawTransactionsForAddress(t *testing.T) {
 
 		ast.EqualError(err, constants.UnsupportedChainError.Error(), "Call should err for an unsupported chain")
 		ast.Empty(resp, "call should return an empty object")
+	})
+
+}
+
+func TestTxnDetailsImpl_GetBulkTxnDetails(t *testing.T) {
+	txnDetails := getTestTxnDetails()
+
+	t.Run("Valid params should make a call with no errors", func(t *testing.T) {
+		ast := assert.New(t)
+		validAddr := []string{"0x89c0edaf218ea63e541ff720a9b5af6b8183c8fd513866babda793e2c583e429"}
+		validChain := constants.MATIC
+
+		resp, err := txnDetails.GetBulkTxnDetails(validChain, validAddr)
+
+		ast.NoError(err, "there should be no error for a valid call")
+		ast.NotEmpty(resp, "this call should have valid transactions present")
+		ast.Len(resp, 1, "There should be only two transactions for this call.")
+	})
+
+	t.Run("missing options should fill defaults", func(t *testing.T) {
+		validAddr := []string{}
+		validChain := constants.MATIC
+		resp, err := txnDetails.GetBulkTxnDetails(validChain, validAddr)
+		ast := assert.New(t)
+
+		ast.NoError(err, "there should be no error for a valid call")
+		ast.Empty(resp, "Should return empty transaction response for invalid tx hash")
+	})
+
+	t.Run("Invalid chain should cause error", func(t *testing.T) {
+		validAddr := []string{""}
+		resp, err := txnDetails.GetBulkTxnDetails(constants.HUOBI, validAddr)
+		ast := assert.New(t)
+
+		ast.EqualError(err, constants.UnsupportedChainError.Error(), "Call should err for an unsupported chain")
+		ast.Empty(resp, "call should return an empty object")
+		log.Infof("resp: %#v", resp)
 	})
 
 }
