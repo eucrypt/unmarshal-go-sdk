@@ -426,5 +426,9 @@ Additionally, support for raw transaction details include:
 `Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`, 
 `Fuse: Mainnet`, `Cronos: Mainnet`, `Velas: Mainnet`
 
+`GetBulkTxnDetails` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`,
+`Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`,
+`Fuse: Mainnet`, `Cronos: Mainnet`, `Velas: Mainnet`
+
 This API includes more details and abstains from including price at the time of the transaction
 

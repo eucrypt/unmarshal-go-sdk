@@ -21,6 +21,7 @@ const (
 	NFT_GetHoldersByID           APIName = "v1/:chain/address/:address/nftholders"
 	TXN_GetTokenTxns             APIName = "v1/:chain/address/:address/transactions"
 	TXN_GetTxnDetails            APIName = "v1/:chain/transactions/:txnID"
+	TXN_GetBulkTxnDetails        APIName = "v1/:chain/bulk-transactions/:txnID"
 	TXN_GetTokenTxnsV2           APIName = "v2/:chain/address/:address/transactions"
 	TXN_GetRawTransactionDetails APIName = "v3/:chain/address/:address/transactions"
 	PROTO_GetPositions           APIName = "v2/protocols/:protocol/address/:address/positions"
@@ -72,6 +73,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		XDC:       true,
 		VELAS:     true,
 	},
+	TXN_GetBulkTxnDetails: rawTxnSupported,
 	TXN_GetTokenTxnsV2: {
 		ARBITRUM:  true,
 		AVALANCHE: true,
