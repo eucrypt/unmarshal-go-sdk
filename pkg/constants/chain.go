@@ -49,7 +49,12 @@ var allChains = map[Chain]bool{
 	ZILLIQA:   true,
 }
 
-var priceStoreSupported = map[Chain]bool{ETH: true, BSC: true, MATIC: true}
+var priceStoreSupported = map[Chain]bool{
+	ARBITRUM: true,
+	BSC:      true,
+	ETH:      true,
+	MATIC:    true,
+}
 
 var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true,
 	MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true,
