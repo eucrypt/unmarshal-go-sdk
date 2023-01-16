@@ -27,9 +27,10 @@ const (
 	VELAS         Chain = "velas"
 	XDC           Chain = "xinfin"
 	ZILLIQA       Chain = "zilliqa"
+	MOONBEAM      Chain = "moonbeam"
 )
 
-//This should be manually changed when a new chain starts being supported
+// This should be manually changed when a new chain starts being supported
 var allChains = map[Chain]bool{
 	ARBITRUM:  true,
 	AVALANCHE: true,
@@ -47,6 +48,7 @@ var allChains = map[Chain]bool{
 	VELAS:     true,
 	XDC:       true,
 	ZILLIQA:   true,
+	MOONBEAM:  true,
 }
 
 var priceStoreSupported = map[Chain]bool{
@@ -58,11 +60,11 @@ var priceStoreSupported = map[Chain]bool{
 
 var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true,
 	MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true,
-	FUSE: true, CRONOS: true, VELAS: true}
+	FUSE: true, CRONOS: true, VELAS: true, MOONBEAM: true}
 
 var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true, VELAS: true, KLAYTN: true, FUSE: true, CRONOS: true}
 
-//String returns the string specific version of the chain
+// String returns the string specific version of the chain
 func (c Chain) String() string {
 	return string(c)
 }
