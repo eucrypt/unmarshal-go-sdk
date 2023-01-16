@@ -56,6 +56,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		XDC:       true,
 		ZILLIQA:   true,
 		VELAS:     true,
+		MOONBEAM:  true,
 	},
 	TXN_GetTxnDetails: {
 		ARBITRUM:  true,
@@ -72,6 +73,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		SOL:       true,
 		XDC:       true,
 		VELAS:     true,
+		MOONBEAM:  true,
 	},
 	TXN_GetBulkTxnDetails: rawTxnSupported,
 	TXN_GetTokenTxnsV2: {
@@ -88,11 +90,12 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		OPTIMISM:  true,
 		XDC:       true,
 		VELAS:     true,
+		MOONBEAM:  true,
 	},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }
 
-//SupportsChain Allows a caller to know if a chain specific API supports a passed valid chain
+// SupportsChain Allows a caller to know if a chain specific API supports a passed valid chain
 func (api APIName) SupportsChain(chain Chain) bool {
 	if allowedCallersByChain[api] == nil {
 		return false
@@ -101,7 +104,7 @@ func (api APIName) SupportsChain(chain Chain) bool {
 	return allowedCallersByChain[api][chain]
 }
 
-//SupportsProtocol Allows a caller to know if a protocol specific API supports a passed valid chain
+// SupportsProtocol Allows a caller to know if a protocol specific API supports a passed valid chain
 func (api APIName) SupportsProtocol(protocol Protocol) bool {
 	if allowedCallersByProtocol[api] == nil {
 		return false
@@ -113,12 +116,12 @@ func (api APIName) GetURI() string {
 	return string(api)
 }
 
-//GetSupportedChains fetches all chains that an API supports as a map of Chain -> bool
+// GetSupportedChains fetches all chains that an API supports as a map of Chain -> bool
 func (api APIName) GetSupportedChains() map[Chain]bool {
 	return allowedCallersByChain[api]
 }
 
-//GetSupportedProtocols fetches all Protocols that an API supports as a map of Protocol -> bool
+// GetSupportedProtocols fetches all Protocols that an API supports as a map of Protocol -> bool
 func (api APIName) GetSupportedProtocols() map[Protocol]bool {
 	return allowedCallersByProtocol[api]
 }
