@@ -58,6 +58,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		VELAS:     true,
 		MOONBEAM:  true,
 		METIS:     true,
+		AURORA:    true,
 	},
 	TXN_GetTxnDetails: {
 		ARBITRUM:  true,
@@ -76,6 +77,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		VELAS:     true,
 		MOONBEAM:  true,
 		METIS:     true,
+		AURORA:    true,
 	},
 	TXN_GetBulkTxnDetails: rawTxnSupported,
 	TXN_GetTokenTxnsV2: {
@@ -94,6 +96,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		VELAS:     true,
 		MOONBEAM:  true,
 		METIS:     true,
+		AURORA:    true,
 	},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }
