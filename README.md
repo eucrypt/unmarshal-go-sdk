@@ -164,11 +164,13 @@ func main() {
       <th>Moonbeam</th>
       <th>Metis</th>
       <th>Aurora</th>
+      <th>Matic Supernet</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>GetTokenAssets</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -208,6 +210,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetTokenTxns</td>
@@ -219,6 +222,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>❌</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -250,6 +254,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
+      <td>✅</td>
     </tr>
     <tr>
       <td>GetTxnDetailsV2</td>
@@ -261,6 +266,7 @@ func main() {
       <td>✅</td>
       <td>❌</td>
       <td>❌</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -292,6 +298,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetTxns - NFT</td>
@@ -313,6 +320,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>✅</td>
     </tr>
     <tr>
       <td>GetDetailsByID</td>
@@ -334,6 +342,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>✅</td>
     </tr>
     <tr>
       <td>GetHoldersByID</td>
@@ -355,6 +364,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetPriceWithAddress</td>
@@ -367,6 +377,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -397,6 +408,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetLpTokenPrice</td>
@@ -409,6 +421,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -439,6 +452,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetGainers</td>
@@ -460,8 +474,8 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
-
   </tbody>
 </table>
 

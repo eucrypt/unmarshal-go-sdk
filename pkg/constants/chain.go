@@ -30,29 +30,31 @@ const (
 	MOONBEAM      Chain = "moonbeam"
 	METIS         Chain = "metis"
 	AURORA        Chain = "aurora"
+	MaticSupernet Chain = "matic-supernet"
 )
 
 // This should be manually changed when a new chain starts being supported
 var allChains = map[Chain]bool{
-	ARBITRUM:  true,
-	AVALANCHE: true,
-	BSC:       true,
-	CELO:      true,
-	CRONOS:    true,
-	ETH:       true,
-	FANTOM:    true,
-	FUSE:      true,
-	HUOBI:     true,
-	KLAYTN:    true,
-	MATIC:     true,
-	OPTIMISM:  true,
-	SOL:       true,
-	VELAS:     true,
-	XDC:       true,
-	ZILLIQA:   true,
-	MOONBEAM:  true,
-	METIS:     true,
-	AURORA:    true,
+	ARBITRUM:      true,
+	AVALANCHE:     true,
+	BSC:           true,
+	CELO:          true,
+	CRONOS:        true,
+	ETH:           true,
+	FANTOM:        true,
+	FUSE:          true,
+	HUOBI:         true,
+	KLAYTN:        true,
+	MATIC:         true,
+	OPTIMISM:      true,
+	SOL:           true,
+	VELAS:         true,
+	XDC:           true,
+	ZILLIQA:       true,
+	MOONBEAM:      true,
+	METIS:         true,
+	AURORA:        true,
+	MaticSupernet: true,
 }
 
 var priceStoreSupported = map[Chain]bool{
@@ -64,7 +66,7 @@ var priceStoreSupported = map[Chain]bool{
 
 var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true,
 	MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true,
-	FUSE: true, CRONOS: true, VELAS: true, MOONBEAM: true, METIS: true, AURORA: true}
+	FUSE: true, CRONOS: true, VELAS: true, MOONBEAM: true, METIS: true, AURORA: true, MaticSupernet: true}
 
 var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true, VELAS: true, KLAYTN: true, FUSE: true, CRONOS: true}
 
