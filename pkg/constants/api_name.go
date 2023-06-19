@@ -61,6 +61,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		AURORA:        true,
 		MaticSupernet: true,
 		ZKEVM:         true,
+		MantleTestnet: true,
 	},
 	TXN_GetTxnDetails: {
 		ARBITRUM:      true,
@@ -82,6 +83,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		AURORA:        true,
 		MaticSupernet: true,
 		ZKEVM:         true,
+		MantleTestnet: true,
 	},
 	TXN_GetBulkTxnDetails: rawTxnSupported,
 	TXN_GetTokenTxnsV2: {
@@ -103,6 +105,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		AURORA:        true,
 		MaticSupernet: true,
 		ZKEVM:         true,
+		MantleTestnet: true,
 	},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }
