@@ -167,11 +167,13 @@ func main() {
       <th>Matic Supernet</th>
       <th>zkEVM</th>
       <th>Mantle Testnet</th>
+      <th>Mantle Alpha</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>GetTokenAssets</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -217,6 +219,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetTokenTxns</td>
@@ -228,6 +231,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>❌</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -265,6 +269,7 @@ func main() {
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
+      <td>✅</td>
     </tr>
     <tr>
       <td>GetTxnDetailsV2</td>
@@ -276,6 +281,7 @@ func main() {
       <td>✅</td>
       <td>❌</td>
       <td>❌</td>
+      <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -313,6 +319,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetTxns - NFT</td>
@@ -335,6 +342,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
     </tr>
@@ -361,6 +369,7 @@ func main() {
       <td>✅</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetHoldersByID</td>
@@ -385,6 +394,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetPriceWithAddress</td>
@@ -397,6 +407,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -433,6 +444,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetLpTokenPrice</td>
@@ -445,6 +457,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>✅</td>
+      <td>❌</td>
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
@@ -481,6 +494,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
     <tr>
       <td>GetGainers</td>
@@ -505,6 +519,7 @@ func main() {
       <td>❌</td>
       <td>❌</td>
       <td>❌</td>
+      <td>❌</td>
     </tr>
   </tbody>
 </table>
@@ -514,11 +529,11 @@ Additionally, support for raw transaction details include:
 `GetRawTransactionsForAddress` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`,
 `Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`,
 `Fuse: Mainnet`, `Cronos: Mainnet`, `Velas: Mainnet`, `Moonbeam: Mainnet`, `Metis: Mainnet`, `Aurora: Mainnet`, 
-`zkEVM: Mainnet`,`Mantle: Testnet`
+`zkEVM: Mainnet`,`Mantle: Testnet`, `MantleAlpha: Mainnet`
 
 `GetBulkTxnDetails` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`,
 `Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`,
-`Fuse: Mainnet`, `Cronos: Mainnet`, `Velas: Mainnet`, `zkEVM: Mainnet`, `Mantle: Testnet`
+`Fuse: Mainnet`, `Cronos: Mainnet`, `Velas: Mainnet`, `zkEVM: Mainnet`, `Mantle: Testnet`, `MantleAlpha: Mainnet`
 
 This API includes more details and abstains from including price at the time of the transaction
 
