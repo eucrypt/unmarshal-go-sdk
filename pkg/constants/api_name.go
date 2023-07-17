@@ -62,7 +62,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MaticSupernet:  true,
 		ZKEVM:          true,
 		MANTLE_TESTNET: true,
-		MANTLE:         true,
+		MANTLE_ALPHA:   true,
 	},
 	TXN_GetTxnDetails: {
 		ARBITRUM:       true,
@@ -85,7 +85,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MaticSupernet:  true,
 		ZKEVM:          true,
 		MANTLE_TESTNET: true,
-		MANTLE:         true,
+		MANTLE_ALPHA:   true,
 	},
 	TXN_GetBulkTxnDetails: rawTxnSupported,
 	TXN_GetTokenTxnsV2: {
@@ -108,7 +108,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MaticSupernet:  true,
 		ZKEVM:          true,
 		MANTLE_TESTNET: true,
-		MANTLE:         true,
+		MANTLE_ALPHA:   true,
 	},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }

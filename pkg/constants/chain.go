@@ -33,7 +33,7 @@ const (
 	MaticSupernet  Chain = "matic-supernet"
 	ZKEVM          Chain = "zkevm"
 	MANTLE_TESTNET Chain = "mantle-testnet"
-	MANTLE         Chain = "mantle"
+	MANTLE_ALPHA   Chain = "mantle-alpha"
 )
 
 // This should be manually changed when a new chain starts being supported
@@ -60,7 +60,7 @@ var allChains = map[Chain]bool{
 	MaticSupernet:  true,
 	ZKEVM:          true,
 	MANTLE_TESTNET: true,
-	MANTLE:         true,
+	MANTLE_ALPHA:   true,
 }
 
 var priceStoreSupported = map[Chain]bool{
@@ -73,7 +73,7 @@ var priceStoreSupported = map[Chain]bool{
 var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true,
 	MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true,
 	FUSE: true, CRONOS: true, VELAS: true, MOONBEAM: true, METIS: true, AURORA: true, MaticSupernet: true, ZKEVM: true,
-	MANTLE_TESTNET: true, MANTLE: true}
+	MANTLE_TESTNET: true, MANTLE_ALPHA: true}
 
 var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true, VELAS: true, KLAYTN: true, FUSE: true, CRONOS: true}
 
