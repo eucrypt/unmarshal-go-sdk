@@ -167,7 +167,7 @@ func main() {
       <th>Matic Supernet</th>
       <th>zkEVM</th>
       <th>Mantle Testnet</th>
-      <th>Mantle Alpha</th>
+      <th>Mantle</th>
     </tr>
   </thead>
   <tbody>
@@ -529,11 +529,11 @@ Additionally, support for raw transaction details include:
 `GetRawTransactionsForAddress` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`,
 `Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`,
 `Fuse: Mainnet`, `Cronos: Mainnet`, `Velas: Mainnet`, `Moonbeam: Mainnet`, `Metis: Mainnet`, `Aurora: Mainnet`, 
-`zkEVM: Mainnet`,`Mantle: Testnet`, `MantleAlpha: Mainnet`
+`zkEVM: Mainnet`,`Mantle: Testnet`, `Mantle: Mainnet`
 
 `GetBulkTxnDetails` : `Ethereum: Mainnet`, `Ethereum: Rinkeby`, `BSC`, `BSC: Testnet`, `Polygon`,
 `Polygon: Mumbai`, `Avalanche: Mainnet`, `Arbitrum: Mainnet`, `Celo: Mainnet`, `Fantom: Mainnet`, `Klaytn: Mainnet`,
-`Fuse: Mainnet`, `Cronos: Mainnet`, `Velas: Mainnet`, `zkEVM: Mainnet`, `Mantle: Testnet`, `MantleAlpha: Mainnet`
+`Fuse: Mainnet`, `Cronos: Mainnet`, `Velas: Mainnet`, `zkEVM: Mainnet`, `Mantle: Testnet`, `Mantle: Mainnet`
 
 This API includes more details and abstains from including price at the time of the transaction
 
