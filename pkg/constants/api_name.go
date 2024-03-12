@@ -64,6 +64,8 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MANTLE_TESTNET: true,
 		MANTLE:         true,
 		MODE:           true,
+		MANTA:          true,
+		MANTA_TESTNET:  true,
 	},
 	TXN_GetTxnDetails: {
 		ARBITRUM:       true,
@@ -88,6 +90,8 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MANTLE_TESTNET: true,
 		MANTLE:         true,
 		MODE:           true,
+		MANTA:          true,
+		MANTA_TESTNET:  true,
 	},
 	TXN_GetBulkTxnDetails: rawTxnSupported,
 	TXN_GetTokenTxnsV2: {
@@ -112,6 +116,8 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MANTLE_TESTNET: true,
 		MANTLE:         true,
 		MODE:           true,
+		MANTA:          true,
+		MANTA_TESTNET:  true,
 	},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }
