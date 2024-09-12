@@ -8,7 +8,7 @@ const (
 )
 
 var endpointMap = map[Environment]string{
-	Prod:  "https://api.unmarshal.com",
+	Prod:  "https://api.prod.unmarshal.com",
 	Stage: "https://stg-api.unmarshal.com",
 }
 
