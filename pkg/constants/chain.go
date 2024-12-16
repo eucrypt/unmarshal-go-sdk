@@ -39,6 +39,7 @@ const (
 	MANTA_TESTNET    Chain = "manta-testnet"
 	BASE             Chain = "base"
 	REDBELLY_TESTNET Chain = "redbelly-testnet"
+	REDBELLY         Chain = "redbelly"
 )
 
 // This should be manually changed when a new chain starts being supported
@@ -71,6 +72,7 @@ var allChains = map[Chain]bool{
 	MANTA_TESTNET:    true,
 	BASE:             true,
 	REDBELLY_TESTNET: true,
+	REDBELLY:         true,
 }
 
 var priceStoreSupported = map[Chain]bool{
@@ -83,9 +85,9 @@ var priceStoreSupported = map[Chain]bool{
 var rawTxnSupported = map[Chain]bool{ETH: true, ETH_RINKEBY: true, BSC: true, BSC_TESTNET: true, MATIC: true,
 	MATIC_TESTNET: true, OPTIMISM: true, AVALANCHE: true, ARBITRUM: true, CELO: true, FANTOM: true, KLAYTN: true,
 	FUSE: true, CRONOS: true, VELAS: true, MOONBEAM: true, METIS: true, AURORA: true, MaticSupernet: true, ZKEVM: true,
-	MANTLE_TESTNET: true, MANTLE: true, MODE: true, MANTA: true, MANTA_TESTNET: true, BASE: true, REDBELLY_TESTNET: true}
+	MANTLE_TESTNET: true, MANTLE: true, MODE: true, MANTA: true, MANTA_TESTNET: true, BASE: true, REDBELLY_TESTNET: true, REDBELLY: true}
 
-var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true, VELAS: true, KLAYTN: true, FUSE: true, CRONOS: true, MANTA: true, BASE: true, REDBELLY_TESTNET: true}
+var nftEVMSupport = map[Chain]bool{ETH: true, BSC: true, MATIC: true, AVALANCHE: true, VELAS: true, KLAYTN: true, FUSE: true, CRONOS: true, MANTA: true, BASE: true, REDBELLY_TESTNET: true, REDBELLY: true}
 
 // String returns the string specific version of the chain
 func (c Chain) String() string {

@@ -36,7 +36,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 	PS_GetGainers:            priceStoreSupported,
 	ASSETS_GetTokenAssets:    allChains,
 	ASSETS_GetProfitsAndLoss: priceStoreSupported,
-	NFT_GetNFTAssets:         {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, SOL: true, VELAS: true, FUSE: true, CRONOS: true, KLAYTN: true, REDBELLY_TESTNET: true},
+	NFT_GetNFTAssets:         {ETH: true, BSC: true, MATIC: true, AVALANCHE: true, SOL: true, VELAS: true, FUSE: true, CRONOS: true, KLAYTN: true, REDBELLY_TESTNET: true, REDBELLY: true},
 	NFT_GetTxns:              nftEVMSupport,
 	NFT_GetDetailsByID:       nftEVMSupport,
 	NFT_GetHoldersByID:       nftEVMSupport,
@@ -68,6 +68,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MANTA_TESTNET:    true,
 		BASE:             true,
 		REDBELLY_TESTNET: true,
+		REDBELLY:         true,
 	},
 	TXN_GetTxnDetails: {
 		ARBITRUM:         true,
@@ -96,6 +97,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MANTA_TESTNET:    true,
 		BASE:             true,
 		REDBELLY_TESTNET: true,
+		REDBELLY:         true,
 	},
 	TXN_GetBulkTxnDetails: rawTxnSupported,
 	TXN_GetTokenTxnsV2: {
@@ -124,6 +126,7 @@ var allowedCallersByChain = map[APIName]map[Chain]bool{
 		MANTA_TESTNET:    true,
 		BASE:             true,
 		REDBELLY_TESTNET: true,
+		REDBELLY:         true,
 	},
 	TXN_GetRawTransactionDetails: rawTxnSupported,
 }
